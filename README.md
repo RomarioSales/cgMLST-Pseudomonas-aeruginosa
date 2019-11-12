@@ -16,6 +16,7 @@ Prodigal 2.6.0 https://github.com/hyattpd/prodigal/releases/ or above
 
 Other dependencies (for schema evaluation only):
 . ClustalW2 http://www.clustal.org/download/current/
+. MAFFT https://mafft.cbrc.jp/alignment/software/linux.html
 * NCBI complete genomes?
 
 
