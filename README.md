@@ -10,7 +10,12 @@ cgMLST to Pseudomonas aeruginosa.
 
  
 ## Softwares e Downloads
+* Main dependencies:
+BLAST 2.5.0+ ftp://ftp.ncbi.nih.gov/blast/executables/blast+/2.5.0/ or above
+Prodigal 2.6.0 https://github.com/hyattpd/prodigal/releases/ or above
 
+Other dependencies (for schema evaluation only):
+. ClustalW2 http://www.clustal.org/download/current/
 * NCBI complete genomes?
 
 
