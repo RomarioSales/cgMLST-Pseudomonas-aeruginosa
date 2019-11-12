@@ -1,6 +1,6 @@
 # cgMLST-Pa
 
-Script utilizado para realizar o esquema de cgMLST com o chewBBACA
+cgMLST to Pseudomonas aeruginosa.
 
 
 
