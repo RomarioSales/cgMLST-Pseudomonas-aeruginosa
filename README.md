@@ -15,10 +15,10 @@ BLAST 2.5.0+ ftp://ftp.ncbi.nih.gov/blast/executables/blast+/2.5.0/ or above
 Prodigal 2.6.0 https://github.com/hyattpd/prodigal/releases/ or above
 
 Other dependencies (for schema evaluation only):
-. ClustalW2 http://www.clustal.org/download/current/
-. MAFFT https://mafft.cbrc.jp/alignment/software/linux.html
-. DATAMASH https://www.gnu.org/software/datamash/
-. MLST https://github.com/sanger-pathogens/mlst_check
+ClustalW2 http://www.clustal.org/download/current/
+MAFFT https://mafft.cbrc.jp/alignment/software/linux.html
+DATAMASH https://www.gnu.org/software/datamash/
+MLST https://github.com/sanger-pathogens/mlst_check
 
 * NCBI complete genomes https://www.ncbi.nlm.nih.gov/assembly In this part put the pathogen of interest that in our case was P. aeruginosa and select the option RefSeq that corresponds (A comprehensive, integrated, non-redundant, well-annotated set of reference sequences including genomic, transcript, and protein). Thus was obtained 142 genomes complete, 25 chromosome, 1709 contigs, and 1025 scaffold sequence of P. aeruginosa publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) as of September 2018 were used. 
 
