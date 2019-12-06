@@ -127,19 +127,19 @@ chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120ca%.t
 
  
 
-\##**Comentário:** Este comando identifica os *loci* candidatos em cada um dos genomas de validação e atribui um perfil alélico para cada um deles pelo AlleleCall.
+\##**Comment:** This command identifies the *loci* candidates in each of the validation genomes and assigns an allelic profile to each of them by the AlleleCall.
 
 
 
-\##**Comentário:** Esta pasta “GenomasValidacao210919” possui todos os genomas de validação adquiridos no NCBI que possui ST.
+\##**Comment:** This folder “GenomasValidacao210919” has all the validation genomes acquired from the NCBI that has ST.
 
 
 
-\##**Parte 3.1 -** **Concatenar a matrix do perfil alélico obtido da criação do esquema com a matrix obtida para os genomas de validação**
+\##**Part 3.1 -** **Concatenate the allelic profile matrix obtained from the creation of the scheme with the matrix obtained for the validation genomes.**
 
 
 
-\##**Comentário:** Para concatenar a matrix dos *loci* que definiu o esquema e a matrix dos loci dos genomas de validação foi utilizado os scripts abaixo:
+\##**Comment:** to concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following scripts:
 
 ```bash
 head -n 1 cgMLST_120/cgMLST.tsv > cgMLST_all.tsv
@@ -153,7 +153,7 @@ grep -v ^FILE cgMLST_120/cgMLST.tsv results/ results_20190922T222448/results_all
 
 
 
-## Step 3.2:  Avaliação da qualidade dos genomas
+## Step 3.2: Evaluation of genome quality
 
 
 
@@ -165,23 +165,23 @@ grep -v ^FILE cgMLST_120/cgMLST.tsv results/ results_20190922T222448/results_all
 
 
 
-\##**Comentário:** Após a concatenação é realizado o *TestGenomeQuality* para avaliar o impacto de cada genoma de validação em relação aos *loci* candidatos visando excluir genomas de validação de baixa qualidade. Nesta etapa é necessário definir um novo *Threshold* para este conjunto de dados, bem como um novo valor do parâmetro *p*, pois os loci que ficarem após os filtros são aqueles que constituíram o esquema final. 
+\##**Comment:** After concatenation, the *TestGenomeQuality* to assess the impact of each validation genome in relation to the *loci* candidates in order to exclude low quality validation genomes. In this step you need to define a new *Threshold* for this dataset, as well as a new value of the parameter *p*, because loci that remain after the filters are the ones that constituted the final scheme.
 
 
 
-\##**Comentário: Para excluir os genomas de validação que saíram do esquema é necessário seguir os passos descritos na Parte 2.2**
+\##**Comment: In order to exclude validation genomes that have left the scheme it is necessary to follow the steps described in Part 2.2**
 
 
 
-## Step 4:  Extraindo os loci da Matrix
+## Step 4:  Extracting the Matrix loci
 
 
 
-\##**Comentário:** Nesta etapa optamos em escolher os *loci* presentes em 99% (*p0.99*) dos genomas de validação e o *Threshold* 200 que limitou a perda dos *loci* nos genomas.
+\##**Comment:** In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes.
 
 
 
-\##**Comentário:** Os genomas que foram excluídos no *Threshold* 200 foram colocados no arquivo removedGenomes200thr.txt 
+\##**Comment:** The genomes that were excluded in the *Threshold* 200 have been placed in the removedGenomes200thr.txt 
 
 
 
@@ -191,7 +191,7 @@ datamash -W transpose < removedGenomes200.txt > removedGenomes200thr.txt
 
 
 
-\##**Comentário:** Para transpor (colocar os nomes dos genomas de validação um em cada linha) utilizei o datamash e criei o arquivo > removedGenomes200thr.txt.
+\##**Comment:** To transpose (put the names of the validation genomes one in each line) I used the datamash and created the file > removedGenomes200thr.txt.
 
  
 
@@ -201,11 +201,11 @@ chewBBACA.py ExtractCgMLST -i cgMLST_all.tsv -o cgMLST_200 -p0.99 -g removedGeno
 
 
 
-\##**Comentário:** Este script seleciona os *loci* e genomas que permaneceram no *Threshold* 200 e exclui os genomas de validação e loci que foram excluídos neste *Threshold*.
+\##**Comment:** This script selects *loci* and genomes that remained in the *Threshold* 200 and excludes the validation and loci genomes that were excluded in this *Threshold*.
 
 
 
-\##**Avaliação do esquema de cgMLST** (**Schema Evaluator was run on the cgMLST schema):**
+\##**Evaluation of the schema cgMLST** (**Schema Evaluator was run on the cgMLST schema):**
 
 
 
@@ -215,11 +215,11 @@ chewBBACA.py SchemaEvaluator -i schema_seed/ -l rms/RmS.html -ta 11 --title "cgM
 
 
 
-\##**Comentário:** Para avaliar a variabilidade dos *loci* alvos do cgMLST bem como a qualidade dos *loci* selecionados rodamos este script e visualizamos graficamente os dados.
+\##**Comment:** To assess the variability of the *loci* targets of cgMLST as well as the quality of the *loci* we run this script and graphically visualize the data.
 
 
 
-\##**Analisar as proteínas dos genes do wgMLST**
+\##**Analyze the proteins in the genes of the wgMLST**
 
 ```bash
 chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
@@ -227,4 +227,4 @@ chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
 
 
 
-\##**Comentário:** Para verificar qual proteína codifica cada loci encontrado do wg/cgMLST.
+\##**Comment:** To check which protein encodes each loci found in the wg/cgMLST.
