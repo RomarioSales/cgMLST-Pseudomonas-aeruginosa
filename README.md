@@ -38,7 +38,7 @@ The genome used for training was removed from the analysis.
 chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema_seed --ptf PAO1.trn
 ```
 
-**Note:** Genomes20181011Nem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
+**Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
 
 
 
