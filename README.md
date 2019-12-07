@@ -9,7 +9,7 @@ cgMLST to Pseudomonas aeruginosa.
 * https://github.com/B-UMMI/chewBBACA_tutorial
 
  
-## Softwares e Downloads
+## Softwares and Downloads
 * Main dependencies:
 BLAST 2.5.0+ ftp://ftp.ncbi.nih.gov/blast/executables/blast+/2.5.0/ or above
 Prodigal 2.6.0 https://github.com/hyattpd/prodigal/releases/ or above
@@ -22,7 +22,9 @@ MLST https://github.com/sanger-pathogens/mlst_check
 
 * NCBI complete genomes https://www.ncbi.nlm.nih.gov/assembly In this part put the pathogen of interest that in our case was P. aeruginosa and select the option RefSeq that corresponds (A comprehensive, integrated, non-redundant, well-annotated set of reference sequences including genomic, transcript, and protein). Thus was obtained 142 genomes complete, 25 chromosome, 1709 contigs, and 1025 scaffold sequence of P. aeruginosa publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) as of September 2018 were used. 
 
-* Genomes that could not be assigned type sequence (ST) with MLST by the software (https://github.com/sanger-pathogens/mlst_check) were removed the construction of the cgMLST schema. Thus, of the 2901 available genomes, it was possible to assign ST to 2828 sequence genomes. These genomes were used to construct and validate the cgMLST scheme. 
+* Genomes that could not be assigned type sequence (ST) with MLST by the software (https://github.com/sanger-pathogens/mlst_check) were removed the construction of the cgMLST schema. Thus, of the 2901 available genomes, it was possible to assign ST to 2828 sequence genomes. These genomes were used to construct and validate the cgMLST scheme. A second filter was added to remove unfinished genomes that had many contigs. So we chose to remove genomes with ≥200 contigs. In this filter 502 genomes were removed. 
+In general, 73 genomes were removed due to the absence of MLST loci, 502 were removed because they have ≥200 contigs. Thus, of the 2901 genomes obtained from NCBI, 2326 genomes were used for the construction and validation of the cgMLST scheme, being 142 complete and 2184 unfinished genomes were used for the validation of candidate genes obtained with the 142 complete genomes.
+
 
 ## Step 1: Schema creation
 
@@ -36,7 +38,7 @@ The genome used for training was removed from the analysis.
 chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema_seed --ptf PAO1.trn
 ```
 
-**Note:** Genomes20181011Nem_Plasmideo141: Folder containing the complete NCBI genomes that created the schema.
+**Note:** Genomes20181011Nem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
 
 
 
@@ -52,7 +54,7 @@ chewBBACA.py AlleleCall -i Genomes20181011Sem_Plasmideo141 -g schema_seed/ -o re
 
 ## Step 2.1: Paralog detection
 
-In this step the script removes the *loci* considered parallogues from the result of the previous script.
+In this step the script removes the *loci* considered paralogous genes from the result of the previous script.
 
 ```bash
 # run remove genes
@@ -131,7 +133,7 @@ chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120ca%.t
 
 
 
-\##**Comment:** This folder “GenomasValidacao210919” has all the validation genomes acquired from the NCBI that has ST.
+\##**Comment:** This folder “GenomasValidacao210919” has all 2184 validation genomes acquired from the NCBI that has ST and and they had less than 200 contigs.
 
 
 
@@ -139,7 +141,7 @@ chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120ca%.t
 
 
 
-\##**Comment:** to concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following scripts:
+\##**Comment:** To concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following scripts:
 
 ```bash
 head -n 1 cgMLST_120/cgMLST.tsv > cgMLST_all.tsv
