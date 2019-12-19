@@ -1,6 +1,6 @@
 # cgMLST-Pa
 
-cgMLST to Pseudomonas aeruginosa.
+cgMLST to *Pseudomonas aeruginosa*.
 
 
 
@@ -20,10 +20,10 @@ MAFFT https://mafft.cbrc.jp/alignment/software/linux.html
 DATAMASH https://www.gnu.org/software/datamash/
 MLST https://github.com/sanger-pathogens/mlst_check
 
-* NCBI complete genomes https://www.ncbi.nlm.nih.gov/assembly In this part put the pathogen of interest that in our case was P. aeruginosa and select the option RefSeq that corresponds (A comprehensive, integrated, non-redundant, well-annotated set of reference sequences including genomic, transcript, and protein). Thus was obtained 142 genomes complete, 25 chromosome, 1709 contigs, and 1025 scaffold sequence of P. aeruginosa publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) as of September 2018 were used. 
+* NCBI complete genomes https://www.ncbi.nlm.nih.gov/assembly. In this part put the pathogen of interest that in our case was *P. aeruginosa* and select the option RefSeq that corresponds (A comprehensive, integrated, non-redundant, well-annotated set of reference sequences including genomic, transcript, and protein). Thus was obtained 142 genomes complete, 25 chromosome, 1709 contigs, and 1025 scaffold sequence of P. aeruginosa publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) as of September 2018 were used. 
 
 * Genomes that could not be assigned type sequence (ST) with MLST by the software (https://github.com/sanger-pathogens/mlst_check) were removed the construction of the cgMLST schema. Thus, of the 2901 available genomes, it was possible to assign ST to 2828 sequence genomes. These genomes were used to construct and validate the cgMLST scheme. A second filter was added to remove unfinished genomes that had many contigs. So we chose to remove genomes with ≥200 contigs. In this filter 502 genomes were removed. 
-In general, 73 genomes were removed due to the absence of MLST loci, 502 were removed because they have ≥200 contigs. Thus, of the 2901 genomes obtained from NCBI, 2326 genomes were used for the construction and validation of the cgMLST scheme, being 142 complete and 2184 unfinished genomes were used for the validation of candidate genes obtained with the 142 complete genomes.
+In general, 73 genomes were removed due to the absence of MLST *loci*, 502 were removed because they have ≥200 contigs. Thus, of the 2901 genomes obtained from NCBI, 2326 genomes were used for the construction and validation of the cgMLST scheme, being 142 complete and 2184 unfinished genomes were used for the validation of candidate genes obtained with the 142 complete genomes.
 
 
 ## Step 1: Schema creation
@@ -64,7 +64,7 @@ chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.t
 
 ## Step 2.2: Genomes Quality Control
 
-In this step it is necessary to define the *Threshold* of the Scheme that limits the loss of *loci* targets of the Schema Creation genomes and excludes genomes considered to be of poor quality due to the *loci*  loss. 
+In this step it is necessary to define the *Threshold* of the Scheme that limits the loss of *loci* targets of the Schema Creation genomes and excludes genomes considered to be of poor quality due to the *loci* loss. 
 
 The next step is to define the percentage of *loci* that will constitute the Scheme, this can be **100%, 99.5%, 99% and 95%** of the *loci* present in the breeding genomes. This is one of the main steps in defining the cgMLST schema targets.
 
@@ -79,7 +79,7 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 
 ## Step 2.3: Extracting Matrix Loci
 
-In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the Threshold chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this Threshold and create a new file named, for example, GenomeRemoved120thr.txt. In this *Threshold* (120) 11 complete genomes were removed due to loss of target *loci*. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
+In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the *Threshold* chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this *Threshold* and create a new file named, for example, GenomeRemoved120thr.txt. In this *Threshold* (120) 11 complete genomes were removed due to loss of target *loci*. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
 
 
 
@@ -179,7 +179,7 @@ grep -v ^FILE cgMLST_120/cgMLST.tsv results/ results_20190922T222448/results_all
 
 
 
-\##**Comment:** In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. In this threshold (200) 5 unfinished genomes were removed due to loss of *loci* targets.
+\##**Comment:** In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. In this *Threshold* (200) 5 unfinished genomes were removed due to loss of *loci* targets.
 
 
 
@@ -203,7 +203,7 @@ chewBBACA.py ExtractCgMLST -i cgMLST_all.tsv -o cgMLST_200 -p0.99 -g removedGeno
 
 
 
-\##**Comment:** This script selects *loci* and genomes that remained in the *Threshold* 200 and excludes the validation and loci genomes that were excluded in this *Threshold*.
+\##**Comment:** This script selects *loci* and genomes that remained in the *Threshold* 200 and excludes the validation and *loci* genomes that were excluded in this *Threshold*.
 
 
 
