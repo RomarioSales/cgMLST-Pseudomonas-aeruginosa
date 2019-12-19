@@ -107,7 +107,7 @@ To transpose (put the names of the core genes on each line) I used the datamash 
 
 ```bash
 # transpose table
-datamash -W transpose <Genes_100%_Core_120.txt > Genes_Core_Al.txt 
+datamash -W transpose < Genes_100%_Core_120.txt > Genes_Core_Al.txt 
 ```
 
 This print schema_seed / command on each cgMLST target gene for use in the validation step.
