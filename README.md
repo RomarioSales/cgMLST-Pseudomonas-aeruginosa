@@ -30,7 +30,7 @@ In general, 73 genomes were removed due to the absence of MLST loci, 502 were re
 
 To train Prodigal in recognizing the coding sequences (CDs) of the *Pseudomonas aeruginosa* genome it was trained with the PAO1 reference genome (GCF_000006765.1) that generated the PAO1.trn file. 
 
-The genome used for training was removed from the analysis.
+**The genome used for training was removed from the analysis**.
 
 
 ```bash
@@ -64,7 +64,7 @@ chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.t
 
 ## Step 2.2: Genomes Quality Control
 
-In this step it is necessary to define the **Threshold** of the Scheme that limits the loss of *loci* targets of the Schema Creation genomes and excludes genomes considered to be of poor quality due to the *loci*  loss. 
+In this step it is necessary to define the *Threshold* of the Scheme that limits the loss of *loci* targets of the Schema Creation genomes and excludes genomes considered to be of poor quality due to the *loci*  loss. 
 
 The next step is to define the percentage of *loci* that will constitute the Scheme, this can be **100%, 99.5%, 99% and 95%** of the *loci* present in the breeding genomes. This is one of the main steps in defining the cgMLST schema targets.
 
@@ -79,7 +79,7 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 
 ## Step 2.3: Extracting Matrix Loci
 
-In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the Threshold chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this Threshold and create a new file named, for example, GenomeRemoved120thr.txt. In this threshold (120) 11 complete genomes were removed due to loss of target *loci*. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
+In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the Threshold chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this Threshold and create a new file named, for example, GenomeRemoved120thr.txt. In this *Threshold* (120) 11 complete genomes were removed due to loss of target *loci*. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
 
 
 
