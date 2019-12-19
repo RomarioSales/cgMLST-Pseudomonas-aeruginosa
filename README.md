@@ -79,7 +79,7 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 
 ## Step 2.3: Extracting Matrix Loci
 
-In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the Threshold chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this Threshold and create a new file named, for example, GenomeRemoved120thr.txt. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
+In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the Threshold chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this Threshold and create a new file named, for example, GenomeRemoved120thr.txt. In this threshold (120) 11 complete genomes were removed due to loss of target *loci. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
 
 
 
@@ -179,7 +179,7 @@ grep -v ^FILE cgMLST_120/cgMLST.tsv results/ results_20190922T222448/results_all
 
 
 
-\##**Comment:** In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes.
+\##**Comment:** In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. In this threshold (200) 5 unfinished genomes were removed due to loss of *loci* targets.
 
 
 
