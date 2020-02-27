@@ -121,8 +121,6 @@ This print schema_seed / command on each cgMLST target gene for use in the valid
 tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > listgenes_core_100_120ca%.txt
 ```
 
-# Schema Validation
-
 ## Step 3: Schema Validation (Allele call)
 
 This command identifies the *loci* candidates in each of the validation genomes and assigns an allelic profile to each of them by the AlleleCall.
