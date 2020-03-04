@@ -6,6 +6,14 @@ cgMLST to *Pseudomonas aeruginosa*.
 
 * https://github.com/B-UMMI/chewBBACA_tutorial
 
+## Workflow
+
+* Step 1: Schema Creation
+* Step 2: Allele calling
+* Step 3: Schema Validation (Allele call)
+* Step 4: Extracting the Matrix loci
+* Step 5: Evaluation of the schema cgMLST
+* Step 6: Analyze the proteins in the genes of the wgMLST
  
 ## Softwares and Downloads (Main dependencies)
 
@@ -19,30 +27,21 @@ cgMLST to *Pseudomonas aeruginosa*.
 * DATAMASH https://www.gnu.org/software/datamash/
 * MLST https://github.com/sanger-pathogens/mlst_check
 
-## NCBI complete genomes 
-https://www.ncbi.nlm.nih.gov/assembly
-
-In this part put the pathogen of interest that in our case was *P. aeruginosa* and select the option RefSeq that corresponds (A comprehensive, integrated, non-redundant, well-annotated set of reference sequences including genomic, transcript, and protein). Thus was obtained 142 genomes complete, 25 chromosome, 1709 contigs, and 1025 scaffold sequence of P. aeruginosa publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) as of September 2018 were used. 
-
-Genomes that could not be assigned type sequence (ST) with MLST by the software (https://github.com/sanger-pathogens/mlst_check) were removed the construction of the cgMLST schema. Thus, of the 2901 available genomes, it was possible to assign ST to 2828 sequence genomes. These genomes were used to construct and validate the cgMLST scheme. A second filter was added to remove unfinished genomes that had many contigs. So we chose to remove genomes with ≥200 contigs. In this filter 502 genomes were removed. 
-
-In general, 73 genomes were removed due to the absence of MLST *loci*, 502 were removed because they have ≥200 contigs. Thus, of the 2901 genomes obtained from NCBI, 2326 genomes were used for the construction and validation of the cgMLST scheme, being 142 complete and 2184 unfinished genomes were used for the validation of candidate genes obtained with the 142 complete genomes.
-
-## Workflow
-
-* Step 1: Schema Creation
-* Step 2: Allele calling
-* Step 3: Schema Validation (Allele call)
-* Step 4: Extracting the Matrix loci
-* Step 5: Evaluation of the schema cgMLST
-* Step 6: Analyze the proteins in the genes of the wgMLST
-
 ## Step 1: Schema Creation
 
-To train Prodigal in recognizing the coding sequences (CDs) of the *Pseudomonas aeruginosa* genome it was trained with the PAO1 reference genome (GCF_000006765.1) that generated the PAO1.trn file. 
+## Selection of complete genomes 
 
-**The genome used for training was removed from the analysis**.
+For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes, 25 sequences at chromosome level, 1709 at contig level, and 1025 scaffold sequences of P. aeruginosa were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. 
 
+Genomes that could not be assigned MLST type sequence (ST) (https://github.com/sanger-pathogens/mlst_check) were not included for the construction of the cgMLST scheme. Of the 2901 available genomes, it was possible to assign STs to 2828 genomes. A second filter was added to remove unfinished genomes that had ≥200 contigs and 502 genomes were removed. 
+
+In the end, 73 genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2901 genomes obtained from NCBI, 2326 genomes were used for the construction and validation of the cgMLST scheme, (142 complete sequences and 2184 unfinished genomes). 
+
+Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_000006765.1) was included so that the Prodigal algorithm could use it as reference to recognize coding sequences (CDs). Prodigal generated the PAO1.trn file at this step. 
+
+**The PAO1 genome was then removed from further analysis**.
+
+## Definition of CD sequences 
 
 ```bash
 # create schema
@@ -50,7 +49,6 @@ chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema
 ```
 
 **Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
-
 
 ## Step 2: Allele calling
 
