@@ -41,18 +41,22 @@ Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_00000
 
 **The PAO1 genome was then removed from further analysis**.
 
-## Definition of CD sequences 
+## Step 1: Definition of CD sequences 
+
+## Command: 
 
 ```bash
 # create schema
 chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema_seed --ptf PAO1.trn
 ```
 
-**Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
+**Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the scheme.
 
 ## Step 2: Allele calling
 
-In this step the alleles are assigned to each of the CDs found in the breeding genomes.
+In this step the allele calling is performed using the resulting set of *loci* found in step 1.
+
+## Command: 
 
 ```bash
 # run allelecall
@@ -61,73 +65,70 @@ chewBBACA.py AlleleCall -i Genomes20181011Sem_Plasmideo141 -g schema_seed/ -o re
 
 ## Step 2.1: Paralog detection
 
-In this step the script removes the *loci* considered paralogous genes from the result of the previous script.
+In this step *loci* considered paralogous from result of the allelecall (see above) are removed
+
+## Command: 
 
 ```bash
 # run remove genes
 chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.tsv -g results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg
 ```
 
-
 ## Step 2.2: Genomes Quality Control
 
-In this step it is necessary to define the *Threshold* of the Scheme that limits the loss of *loci* targets of the Schema Creation genomes and excludes genomes considered to be of poor quality due to the *loci* loss. 
+In this step we define a *Threshold* of the scheme that limits the loss of *loci* targets defined in the previous steps while excluding genomes considered to be of poor quality due to significant *loci* absence. 
 
-The next step is to define the percentage of *loci* that will constitute the Scheme, this can be **100%, 99.5%, 99% and 95%** of the *loci* present in the breeding genomes. This is one of the main steps in defining the cgMLST schema targets.
+We then define the percentage of *loci* that will constitute the scheme based on how many targets we want to keep in this phase:  **100%, 99.5%, 99% and 95%** of the *loci* present in the set of high quality genomes. This is one of the main steps in defining the cgMLST schema targets.
 
-
+## Commands:
 
 ```bash
 # run test genome quality
 chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 ```
 
-## Step 2.3: Extracting Matrix Loci
-
-In this step we use the list of **removedGenomes** which is output from the **TestGenomeQuality**. In this step we select the *Threshold* chosen from the removedGenomes.txt file, for example, Threshold 120 and select all the genomes that came out of this *Threshold* and create a new file named, for example, GenomeRemoved120thr.txt. In this *Threshold* (120) 11 complete genomes were removed due to loss of target *loci*. The name of the genomes that were obtained from the removedGenomes.txt file must be one on each line for use in the next step.
-
-
+The list of low qualiy genomes will then be removed from the original list using
 
 ```bash
 # run ExtractCgMLST
 chewBBACA.py ExtractCgMLST -i alleleCallMatrix_cg.tsv -o cgMLST_120 -p 1.0 -g GenomeRemoved120thr.txt
 ```
 
+This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of each selected * loci * and will be used to create the core gene list.
 
-This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST scheme * loci * that will be in the allelic profile matrix. The file in this folder (cgMLST.tsv) contains the allelic profile of each selected * loci * and will be used to create the core gene list.
 
+## Step 2.3: Creating the core gene list
 
-## Step 2.4: Creating the core gene list
-
-This command selects all target genes from the "cgMLST.tsv" spreadsheet that corresponds to the first line of this file. Then we perform the script below:
+This command selects all target genes from the "cgMLST.tsv" spreadsheet.
 
 ```bash
 # 10 list
 head -n 1 cgMLST.tsv > Genes_100%_Core_120.txt
 ```
-
-To transpose (put the names of the core genes on each line) I used the datamash and created the file> Genes_Core_Al.txt which is the previous script.
+This list needs to be transposed so that each core gene name is reported in a single line:
 
 ```bash
 # transpose table
 datamash -W transpose < Genes_100%_Core_120.txt > Genes_Core_Al.txt 
 ```
 
-This print schema_seed / command on each cgMLST target gene for use in the validation step.
+This step generated the file> Genes_Core_Al.txt 
+
+This list was then modified so that each name was preceeded by *schema_seed* :
 
 ```bash
 tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > listgenes_core_100_120ca%.txt
 ```
 
-## Step 3: Schema Validation (Allele call)
+## Step 3: Schema Validation (Allele calling)
 
-This command identifies the *loci* candidates in each of the validation genomes and assigns an allelic profile to each of them by the AlleleCall.
+In this step we repeat the allele calling using only the selected candidate *loci* for each of the genomes selected for validation (2184 genome drafts)
 
 ```bash
 chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120ca%.txt -o results --cpu 15 --ptf PAO1.trn
 ```
 
-This folder **GenomasValidacao210919** has all 2184 validation genomes acquired from the NCBI that has ST and and they had less than 200 contigs.
+This folder generated from this step **GenomasValidacao210919** has all 2184 validation draft genomes acquired from the NCBI that has ST and and they had less than 200 contigs.
 
 ## Step 3.1: Concatenate the allelic
 
