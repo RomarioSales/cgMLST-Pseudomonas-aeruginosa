@@ -29,15 +29,11 @@ cgMLST to *Pseudomonas aeruginosa*.
 
 ## Step 1: Schema Creation
 
-## Selection of complete genomes 
+## Selection of complete genomes for schema creation
 
-For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes, 25 sequences at chromosome level, 1709 at contig level, and 1025 scaffold sequences of P. aeruginosa were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. 
+For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes sequences of *P. aeruginosa* were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. 
 
-Genomes that could not be assigned MLST type sequence (ST) (https://github.com/sanger-pathogens/mlst_check) were not included for the construction of the cgMLST scheme. Of the 2901 available genomes, it was possible to assign STs to 2828 genomes. A second filter was added to remove unfinished genomes that had ≥200 contigs and 502 genomes were removed. 
-
-In the end, 73 genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2901 genomes obtained from NCBI, 2326 genomes were used for the construction and validation of the cgMLST scheme, (142 complete sequences and 2184 unfinished genomes). 
-
-Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_000006765.1) was included so that the Prodigal algorithm could use it as reference to recognize coding sequences (CDs). Prodigal generated the PAO1.trn file at this step. 
+Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000).
 
 **The PAO1 genome was then removed from further analysis**.
 
@@ -80,7 +76,7 @@ In this step we define a *Threshold* of the scheme that limits the loss of *loci
 
 We then define the percentage of *loci* that will constitute the scheme based on how many targets we want to keep in this phase:  **100%, 99.5%, 99% and 95%** of the *loci* present in the set of high quality genomes. This is one of the main steps in defining the cgMLST schema targets.
 
-## Commands:
+## Command:
 
 ```bash
 # run test genome quality
@@ -88,6 +84,8 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 ```
 
 The list of low qualiy genomes will then be removed from the original list using
+
+## Command:
 
 ```bash
 # run ExtractCgMLST
@@ -107,6 +105,8 @@ head -n 1 cgMLST.tsv > Genes_100%_Core_120.txt
 ```
 This list needs to be transposed so that each core gene name is reported in a single line:
 
+## Command:
+
 ```bash
 # transpose table
 datamash -W transpose < Genes_100%_Core_120.txt > Genes_Core_Al.txt 
@@ -116,30 +116,45 @@ This step generated the file> Genes_Core_Al.txt
 
 This list was then modified so that each name was preceeded by *schema_seed* :
 
+## Command:
+
 ```bash
 tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > listgenes_core_100_120ca%.txt
 ```
 
-## Step 3: Schema Validation (Allele calling)
+## Step 3: Scheme Validation (Allele calling)
 
-In this step we repeat the allele calling using only the selected candidate *loci* for each of the genomes selected for validation (2184 genome drafts)
+For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. 
+
+Multilocus sequence type (MLST) was determined as described above in step 1: Creating the Schema. New sequence types (STs) were assigned a unique internal identifier (STs ≥4000).
+
+Genomes that could not be assigned MLST type sequence (ST) (https://github.com/sanger-pathogens/mlst_check) were not included for the validation of the cgMLST scheme. Of the 2759 unfinished genomes available, it was possible to assign STs to 2686 unfinished genomes. A second filter was added to remove unfinished genomes that had ≥200 contigs and 502 genomes were removed. 
+
+In the end, 73 unfinished genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2759 genomes obtained from RefSeq, 2184 genomes were used for the validation of the cgMLST scheme. 
+
+
+From this we repeat the allele call using only the selected candidate *3164 loci* for each of the unfinished genomes selected for validation (2184 genome drafts) after performing the filters described above.
+
+## Command:
 
 ```bash
 chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120ca%.txt -o results --cpu 15 --ptf PAO1.trn
 ```
 
-This folder generated from this step **GenomasValidacao210919** has all 2184 validation draft genomes acquired from the NCBI that has ST and and they had less than 200 contigs.
+This folder generated from this step **GenomasValidacao210919** has all 2184 validation unfinished genomes acquired from the RefSeq that has ST and and they had less than 200 contigs.
 
 ## Step 3.1: Concatenate the allelic
 
-Concatenate the allelic profile matrix obtained from the creation of the scheme with the matrix obtained for the validation genomes
+Concatenate the allelic profile matrix obtained from the creation of the scheme with the matrix obtained for the validation genomes. To concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following command:
 
-To concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following scripts:
+## Command:
 
 ```bash
 # create header
 head -n 1 cgMLST_120/cgMLST.tsv > cgMLST_all.tsv
 ```
+
+## Command:
 
 ```bash
 # concatenate
@@ -149,6 +164,8 @@ grep -v ^FILE cgMLST_120/cgMLST.tsv results/ results_20190922T222448/results_all
 ## Step 3.2: Evaluation of genome quality
 
 After concatenation, the *TestGenomeQuality* to assess the impact of each validation genome in relation to the *loci* candidates in order to exclude low quality validation genomes. In this step you need to define a new *Threshold* for this dataset, as well as a new value of the parameter *p*, because loci that remain after the filters are the ones that constituted the final scheme.
+
+## Command:
 
 ```bash
  chewBBACA.py TestGenomeQuality -i cgMLST_all.tsv -n 13 -t 300 -s 5
@@ -162,11 +179,15 @@ In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the vali
 
 To transpose (put the names of the validation genomes one in each line) I used the datamash and created the file > removedGenomes200thr.txt.
 
+## Command:
+
 ```bash
 # transpose
 datamash -W transpose < removedGenomes200.txt > removedGenomes200thr.txt
 ``` 
 The genomes that were excluded in the Threshold 200 have been placed in the **removedGenomes200thr.txt**
+
+## Command:
 
 ```bash
 chewBBACA.py ExtractCgMLST -i cgMLST_all.tsv -o cgMLST_200 -p0.99 -g removedGenomes200thr.txt 
@@ -178,6 +199,8 @@ This script selects *loci* and genomes that remained in the *Threshold* 200 and 
 
 To assess the variability of the *loci* targets of cgMLST as well as the quality of the *loci* we run this script and graphically visualize the data.
 
+## Command:
+
 ```bash
 chewBBACA.py SchemaEvaluator -i schema_seed/ -l rms/RmS.html -ta 11 --title "cgMLST custom r sales" --cpu 6
 ```
@@ -185,6 +208,8 @@ chewBBACA.py SchemaEvaluator -i schema_seed/ -l rms/RmS.html -ta 11 --title "cgM
 ## Step 6: Analyze the proteins in the genes of the wgMLST
 
 To check which protein encodes each loci found in the wg/cgMLST.
+
+## Command:
 
 ```bash
 chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
