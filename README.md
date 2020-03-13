@@ -63,6 +63,8 @@ In this step the allele calling is performed using the resulting set of *loci* f
 chewBBACA.py AlleleCall -i Genomes20181011Sem_Plasmideo141 -g schema_seed/ -o results_cg --cpu 15 --ptf PAO1.trn
 ```
 
+The allele call used the default BLAST Score Ratio (BSR) threshold of 0.6.
+
 ## Step 2.1: Paralog detection
 
 In this step *loci* considered paralogous from result of the allelecall (see above) are removed
@@ -95,6 +97,7 @@ The list of low qualiy genomes will then be removed from the original list using
 # run ExtractCgMLST
 chewBBACA.py ExtractCgMLST -i alleleCallMatrix_cg.tsv -o cgMLST_120 -p 1.0 -g GenomeRemoved120thr.txt
 ```
+A set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%.
 
 This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of each selected * loci * and will be used to create the core gene list.
 
