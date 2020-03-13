@@ -35,6 +35,8 @@ For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://ww
 
 Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000).
 
+Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_000006765.1) was included so that the Prodigal algorithm could use it as reference to recognize coding sequences (CDs). Prodigal generated the PAO1.trn file at this step. 
+
 **The PAO1 genome was then removed from further analysis**.
 
 ## Step 1: Definition of CD sequences 
