@@ -89,6 +89,10 @@ We then define the percentage of *loci* that will constitute the scheme based on
 chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 ```
 
+In this stage we chose to choose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
+
+In this *Threshold 120* a set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%.
+
 The list of low qualiy genomes will then be removed from the original list using
 
 ## Command:
@@ -97,7 +101,6 @@ The list of low qualiy genomes will then be removed from the original list using
 # run ExtractCgMLST
 chewBBACA.py ExtractCgMLST -i alleleCallMatrix_cg.tsv -o cgMLST_120 -p 1.0 -g GenomeRemoved120thr.txt
 ```
-A set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%.
 
 This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of each selected * loci * and will be used to create the core gene list.
 
