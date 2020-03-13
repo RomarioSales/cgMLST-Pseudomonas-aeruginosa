@@ -48,6 +48,8 @@ Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_00000
 chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema_seed --ptf PAO1.trn
 ```
 
+The above command uses 15 CPU and creates the schema in the schema_seed folder using the trained product folder PAO1.trn that was generated using the reference genome PAO1 (GCF_000006765.1). The wgMLST schema was defined with 13588 loci based on the 141 complete genomes that created the schema. At this point the schema is defined as a set of loci each with a single allele. 
+
 **Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the scheme.
 
 ## Step 2: Allele calling
