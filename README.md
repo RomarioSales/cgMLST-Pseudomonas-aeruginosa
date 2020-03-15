@@ -51,6 +51,8 @@ chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema
 
 The above command uses 15 CPU and creates the schema in the schema_seed folder using the trained product folder PAO1.trn that was generated using the reference genome PAO1 (GCF_000006765.1). The wgMLST schema was defined with 13588 loci based on the 141 complete genomes that created the schema. At this point the schema is defined as a set of loci each with a single allele. 
 
+To view the schema_seed data access this link ().
+
 **Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the scheme.
 
 ## Step 2: Allele calling
@@ -208,7 +210,7 @@ This script selects *loci* and genomes that remained in the *Threshold* 200 and 
 
 ## Step 5: Minimum Spanning Tree
 
-Based on the allelic profiles obtained by the cgMLST scheme for each of the 2309 genomes minimum spanning trees were constructed using the software GrapeTree (version 1.5.0) (https://github.com/achtman-lab/GrapeTree/releases) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection. The ```bash cgMLST_200/cgMLST.tsv ``` file contains the allelic profile of the 2309 genomes typed by cgMLST.
+Based on the allelic profiles obtained by the cgMLST scheme for each of the 2309 genomes minimum spanning trees were constructed using the software GrapeTree (version 1.5.0) (https://github.com/achtman-lab/GrapeTree/releases) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection. The ```cgMLST_200/cgMLST.tsv ``` file contains the allelic profile of the 2309 genomes typed by cgMLST.
 
 ## Step 6: Evaluation of the schema cgMLST
 
@@ -219,6 +221,7 @@ To assess the variability of the *loci* targets of cgMLST as well as the quality
 ```bash
 chewBBACA.py SchemaEvaluator -i schema_seed/ -l rms/RmS.html -ta 11 --title "cgMLST custom r sales" --cpu 6
 ```
+To view the data access this link ().
 
 ## Step 7: Analyze the proteins in the genes of the wgMLST
 
