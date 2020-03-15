@@ -78,6 +78,7 @@ In this step *loci* considered paralogous from result of the allelecall (see abo
 # run remove genes
 chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.tsv -g results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg
 ```
+In this step of 82 loci were identified as possible paralogs that were removed from further analysis. The list with the paralog loci can be found at:```results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg```
 
 ## Step 2.2: Genomes Quality Control
 
