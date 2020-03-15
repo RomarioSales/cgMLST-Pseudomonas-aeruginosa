@@ -12,8 +12,9 @@ cgMLST to *Pseudomonas aeruginosa*.
 * Step 2: Allele calling
 * Step 3: Schema Validation (Allele call)
 * Step 4: Extracting the Matrix loci
-* Step 5: Evaluation of the schema cgMLST
-* Step 6: Analyze the proteins in the genes of the wgMLST
+* Step 5: Minimum Spanning Tree
+* Step 6: Evaluation of the schema cgMLST
+* Step 7: Analyze the proteins in the genes of the wgMLST
  
 ## Softwares and Downloads (Main dependencies)
 
@@ -205,7 +206,11 @@ chewBBACA.py ExtractCgMLST -i cgMLST_all.tsv -o cgMLST_200 -p0.99 -g removedGeno
 
 This script selects *loci* and genomes that remained in the *Threshold* 200 and excludes the validation and *loci* genomes that were excluded in this *Threshold*.
 
-## Step 5: Evaluation of the schema cgMLST
+## Step 5: Minimum Spanning Tree
+
+Based on the allelic profiles obtained by the cgMLST scheme for each of the 2309 genomes minimum spanning trees were constructed using the software GrapeTree (version 1.5.0) (https://github.com/achtman-lab/GrapeTree/releases) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection. The ```bash cgMLST_200/cgMLST.tsv ``` file contains the allelic profile of the 2309 genomes typed by cgMLST.
+
+## Step 6: Evaluation of the schema cgMLST
 
 To assess the variability of the *loci* targets of cgMLST as well as the quality of the *loci* we run this script and graphically visualize the data.
 
@@ -215,9 +220,9 @@ To assess the variability of the *loci* targets of cgMLST as well as the quality
 chewBBACA.py SchemaEvaluator -i schema_seed/ -l rms/RmS.html -ta 11 --title "cgMLST custom r sales" --cpu 6
 ```
 
-## Step 6: Analyze the proteins in the genes of the wgMLST
+## Step 7: Analyze the proteins in the genes of the wgMLST
 
-To check which protein encodes each loci found in the wg/cgMLST.
+To check which protein encodes each loci found in the wg/cgMLST. The list of proteins corresponding to all 13588 loci identified in the wg / cgMLST targets is found in the new_protids.tsv file.
 
 ## Command:
 
