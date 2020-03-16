@@ -168,7 +168,7 @@ This folder generated from this step **GenomasValidacao210919** has all 2184 val
 
 The folder with the output file can be found at: ```results_all/ results_20191126T121343/```
 
-Due to the size of the **results_contigsInfo.tsv** file, it was not possible to upload it to GitHub in the ```results_all/ results_20191126T121343/``` folder, but a link to access the file is available at: (https://drive.google.com/open?id=1qrQp90jVo9Dfz1bO9Tenf214QgIdSQpt).
+Due to the size of the **results_contigsInfo.tsv** file, it was not possible to upload it to GitHub in the ```results_all/ results_20191126T121343/``` folder, but a link to access the file is available at: ().
 
 
 ## Step 3.1: Concatenate the allelic
@@ -242,7 +242,8 @@ To assess the variability of the *loci* targets of cgMLST as well as the quality
 ```bash
 chewBBACA.py SchemaEvaluator -i schema_seed/ -l rms/RmS.html -ta 11 --title "cgMLST custom r sales" --cpu 6
 ```
-To view the data access this link ().
+
+Due to the size of the file rms/RmS.html it was not possible to upload it on GitHub, but a link to access the file rms/RmS.html is available at: (https://drive.google.com/open?id=1xzruUPM6yYpm0YVR_EPlcwnlfF_Zzk9H).
 
 ## Step 7: Analyze the proteins in the genes of the wgMLST
 
