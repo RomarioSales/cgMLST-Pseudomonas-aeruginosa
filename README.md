@@ -53,7 +53,7 @@ chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema
 
 The above command uses 15 CPU and creates the schema in the schema_seed folder using the trained product folder PAO1.trn that was generated using the reference genome PAO1 (GCF_000006765.1). The wgMLST schema was defined with 13588 loci based on the 141 complete genomes that created the schema. At this point the schema is defined as a set of loci each with a single allele. 
 
-To view the schema_seed data access this link ().
+Due to the size of the file schema_seed it was not possible to upload it on GitHub, but a link to access the file schema_seed is available at: (https://drive.google.com/open?id=1WpsmbMC0awZ7BH8lazoiv-t56A2xnMIO).
 
 **Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the scheme.
 
