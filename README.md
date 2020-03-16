@@ -168,6 +168,9 @@ This folder generated from this step **GenomasValidacao210919** has all 2184 val
 
 The folder with the output file can be found at: ```results_all/ results_20191126T121343/```
 
+Due to the size of the **results_contigsInfo.tsv** file, it was not possible to upload it to GitHub in the ```results_all/ results_20191126T121343/``` folder, but a link to access the file is available at: (https://drive.google.com/open?id=1qrQp90jVo9Dfz1bO9Tenf214QgIdSQpt).
+
+
 ## Step 3.1: Concatenate the allelic
 
 Concatenate the allelic profile matrix obtained from the creation of the scheme with the matrix obtained for the validation genomes. To concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following command:
