@@ -78,7 +78,7 @@ In this step *loci* considered paralogous from result of the allelecall (see abo
 # run remove genes
 chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.tsv -g results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg
 ```
-In this step of 82 loci were identified as possible paralogs that were removed from further analysis. The list with the paralog loci can be found at:```results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg```
+In this step of 82 *loci* were identified as possible paralogs that were removed from further analysis. The list with the paralog loci can be found at: ```results_cg/results_20190921T183955/RepeatedLoci.txt```
 
 ## Step 2.2: Genomes Quality Control
 
@@ -95,7 +95,7 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 
 In this stage we chose to choose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
 
-In this *Threshold 120* a set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%.
+In this *Threshold 120* a set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%. The output file can be found in the folder: ```results_cg/GenomeQualityPlot.html```
 
 The list of low qualiy genomes will then be removed from the original list using
 
@@ -126,15 +126,18 @@ This list needs to be transposed so that each core gene name is reported in a si
 datamash -W transpose < Genes_100%_Core_120.txt > Genes_Core_Al.txt 
 ```
 
-This step generated the file> Genes_Core_Al.txt 
+This step generated the file> Genes_Core_Al.txt
+
+The list file with 3168 *loci* at ```results_cg/Genes_Core_Al.txt```.
 
 This list was then modified so that each name was preceeded by *schema_seed* :
 
 ## Command:
 
 ```bash
-tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > listgenes_core_100_120ca%.txt
+tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > listgenes_core_100_120.txt
 ```
+This modified list can be found: ```results_cg/listgenes_core_100_120.txt```.
 
 ## Step 3: Scheme Validation (Allele calling)
 
@@ -152,10 +155,12 @@ From this we repeat the allele call using only the selected candidate *3164 loci
 ## Command:
 
 ```bash
-chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120ca%.txt -o results --cpu 15 --ptf PAO1.trn
+chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120.txt -o results --cpu 15 --ptf PAO1.trn
 ```
 
 This folder generated from this step **GenomasValidacao210919** has all 2184 validation unfinished genomes acquired from the RefSeq that has ST and and they had less than 200 contigs.
+
+The folder with the output file can be found at: ```results/ results_20190922T222448/```
 
 ## Step 3.1: Concatenate the allelic
 
@@ -184,12 +189,13 @@ After concatenation, the *TestGenomeQuality* to assess the impact of each valida
 ```bash
  chewBBACA.py TestGenomeQuality -i cgMLST_all.tsv -n 13 -t 300 -s 5
 ```
+The folder with the output file can be found at: ```results/GenomeQualityPlot.html```.
 
 In order to exclude validation genomes that have left the scheme it is necessary to follow the steps described in **Step 2.2**
 
 ## Step 4: Extracting the Matrix loci
 
-In this stage we chose to choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. In this *Threshold* (200) 5 unfinished genomes were removed due to loss of *loci* targets.
+In this stage we choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. In this *Threshold* (200) 5 unfinished genomes were removed due to loss of *loci* targets.
 
 To transpose (put the names of the validation genomes one in each line) I used the datamash and created the file > removedGenomes200thr.txt.
 
@@ -201,6 +207,8 @@ datamash -W transpose < removedGenomes200.txt > removedGenomes200thr.txt
 ``` 
 The genomes that were excluded in the Threshold 200 have been placed in the **removedGenomes200thr.txt**
 
+This file can be found in the folder: ```results/removedGenomes200thr.txt```
+
 ## Command:
 
 ```bash
@@ -208,6 +216,8 @@ chewBBACA.py ExtractCgMLST -i cgMLST_all.tsv -o cgMLST_200 -p0.99 -g removedGeno
 ```
 
 This script selects *loci* and genomes that remained in the *Threshold* 200 and excludes the validation and *loci* genomes that were excluded in this *Threshold*.
+
+The folder with the output file can be found at: ```cgMLST_200```.
 
 ## Step 5: Minimum Spanning Tree
 
