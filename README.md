@@ -36,7 +36,7 @@ For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://ww
 
 Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 142 complete genomes using the sanger-pathogens/mlst_check can be found in the folder "Genomes20181011Sem_Plasmideo141". 
 
-Due to the size of the file it was not possible to upload it on GitHub, but a link to access the folder with the genomes that created the schema is available at: Schema_creation_genomes
+Due to the size of the file it was not possible to upload it on GitHub, but a link to access the folder with the genomes that created the schema is available at:(https://drive.google.com/open?id=1XW84aNuB0FhdVm3CVmpK8pFyCqxXPLMT).
 
 Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_000006765.1) was included so that the Prodigal algorithm could use it as reference to recognize coding sequences (CDs). Prodigal generated the PAO1.trn file at this step. 
 
@@ -145,7 +145,9 @@ This modified list can be found: ```results_cg/listgenes_core_100_120.txt```.
 
 ## Step 3: Scheme Validation (Allele calling)
 
-For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "GenomasValidacao210919" in the .xlsx format.
+For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "GenomasValidacao210919" in the .xlsx format. 
+
+Due to the size of the file it was not possible to upload it on GitHub, but a link to access the folder with the 2759 unfinished genomes is available at: (https://drive.google.com/open?id=1OxWas_V-_7D4hYhPKuA6nYi6NvdoSyEo).
 
 Multilocus sequence type (MLST) was determined as described above in step 1: Creating the Schema. New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 2759 drafts genomes using the sanger-pathogens/mlst_check can be found in the folder "GenomasValidacao210919".
 
