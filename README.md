@@ -55,7 +55,7 @@ The above command uses 15 CPU and creates the schema in the schema_seed folder u
 
 Due to the size of the file schema_seed it was not possible to upload it on GitHub, but a link to access the file schema_seed is available at: (https://drive.google.com/open?id=1WpsmbMC0awZ7BH8lazoiv-t56A2xnMIO).
 
-**Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the scheme.
+**Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
 
 ## Step 2: Allele calling
 
@@ -86,9 +86,9 @@ The output file can be found at: ```analysis_cg/alleleCallMatrix_cg.tsv```
 
 ## Step 2.2: Genomes Quality Control
 
-In this step we define a *Threshold* of the scheme that limits the loss of *loci* targets defined in the previous steps while excluding genomes considered to be of poor quality due to significant *loci* absence. 
+In this step we define a *Threshold* of the schema that limits the loss of *loci* targets defined in the previous steps while excluding genomes considered to be of poor quality due to significant *loci* absence. 
 
-We then define the percentage of *loci* that will constitute the scheme based on how many targets we want to keep in this phase:  **100%, 99.5%, 99% and 95%** of the *loci* present in the set of high quality genomes. This is one of the main steps in defining the cgMLST schema targets.
+We then define the percentage of *loci* that will constitute the schema based on how many targets we want to keep in this phase:  **100%, 99.5%, 99% and 95%** of the *loci* present in the set of high quality genomes. This is one of the main steps in defining the cgMLST schema targets.
 
 ## Command:
 
@@ -146,8 +146,6 @@ This modified list can be found: ```results_cg/listgenes_core_100_120.txt```.
 ## Step 3: Scheme Validation (Allele calling)
 
 For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "GenomasValidacao210919" in the .xlsx format. 
-
-Due to the size of the file it was not possible to upload it on GitHub, but a link to access the folder with the 2759 unfinished genomes is available at: ().
 
 Multilocus sequence type (MLST) was determined as described above in step 1: Creating the Schema. New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 2759 drafts genomes using the sanger-pathogens/mlst_check can be found in the folder "GenomasValidacao210919".
 
