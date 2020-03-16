@@ -11,7 +11,7 @@ cgMLST to *Pseudomonas aeruginosa*.
 * Step 1: Schema Creation
 * Step 2: Allele calling
 * Step 3: Schema Validation (Allele call)
-* Step 4: Extracting the Matrix loci
+* Step 4: Extracting the Matrix *loci*
 * Step 5: Minimum Spanning Tree
 * Step 6: Evaluation of the schema cgMLST
 * Step 7: Analyze the proteins in the genes of the wgMLST
@@ -80,6 +80,8 @@ chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.t
 ```
 In this step of 82 *loci* were identified as possible paralogs that were removed from further analysis. The list with the paralog loci can be found at: ```results_cg/results_20190921T183955/RepeatedLoci.txt```
 
+The output file can be found at: ```analysis_cg/alleleCallMatrix_cg.tsv```
+
 ## Step 2.2: Genomes Quality Control
 
 In this step we define a *Threshold* of the scheme that limits the loss of *loci* targets defined in the previous steps while excluding genomes considered to be of poor quality due to significant *loci* absence. 
@@ -95,9 +97,9 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 
 In this stage we chose to choose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
 
-In this *Threshold 120* a set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%. The output file can be found in the folder: ```results_cg/GenomeQualityPlot.html```
+In this *Threshold 120* a set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%. The output file can be found in the folder: ```analysis_cg/GenomeQualityPlot.html```. 
 
-The list of low qualiy genomes will then be removed from the original list using
+The list of low qualiy genomes will then be removed from the original list using. The list of genomes removed at threshold 120 can be found at: ```analysis_cg/GenomeRemoved120thr.txt```
 
 ## Command:
 
@@ -160,7 +162,7 @@ chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120.txt 
 
 This folder generated from this step **GenomasValidacao210919** has all 2184 validation unfinished genomes acquired from the RefSeq that has ST and and they had less than 200 contigs.
 
-The folder with the output file can be found at: ```results/ results_20190922T222448/```
+The folder with the output file can be found at: ```results_all/ results_20191126T121343/```
 
 ## Step 3.1: Concatenate the allelic
 
@@ -177,8 +179,9 @@ head -n 1 cgMLST_120/cgMLST.tsv > cgMLST_all.tsv
 
 ```bash
 # concatenate
-grep -v ^FILE cgMLST_120/cgMLST.tsv results/ results_20190922T222448/results_alleles.tsv >> cgMLST_all.tsv
+grep -v ^FILE cgMLST_120/cgMLST.tsv results_all/ results_20191126T121343/results_alleles.tsv >> cgMLST_all.tsv
 ```
+The cgMLST_all.tsv file can be found in the folder: ```analysis_all/cgMLST_all.tsv```.
 
 ## Step 3.2: Evaluation of genome quality
 
@@ -189,7 +192,7 @@ After concatenation, the *TestGenomeQuality* to assess the impact of each valida
 ```bash
  chewBBACA.py TestGenomeQuality -i cgMLST_all.tsv -n 13 -t 300 -s 5
 ```
-The folder with the output file can be found at: ```results/GenomeQualityPlot.html```.
+The folder with the output file can be found at: ```analysis_all/GenomeQualityPlot.html```.
 
 In order to exclude validation genomes that have left the scheme it is necessary to follow the steps described in **Step 2.2**
 
@@ -207,7 +210,7 @@ datamash -W transpose < removedGenomes200.txt > removedGenomes200thr.txt
 ``` 
 The genomes that were excluded in the Threshold 200 have been placed in the **removedGenomes200thr.txt**
 
-This file can be found in the folder: ```results/removedGenomes200thr.txt```
+This file can be found in the folder: ```analysis_all/removedGenomes200thr.txt```
 
 ## Command:
 
