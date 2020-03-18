@@ -32,9 +32,9 @@ cgMLST to *Pseudomonas aeruginosa*.
 
 ## Selection of complete genomes for schema creation
 
-For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes sequences of *P. aeruginosa* were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the complete genomes used to create the schema obtained from RefSeq can be found in the folder "Genomes20181011Sem_Plasmideo141" in the .xlsx format.
+For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes sequences of *P. aeruginosa* were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the complete genomes used to create the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the .xlsx format.
 
-Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 142 complete genomes using the sanger-pathogens/mlst_check can be found in the folder "Genomes20181011Sem_Plasmideo141". 
+Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 142 complete genomes using the sanger-pathogens/mlst_check can be found in the folder "Genomes_Validation". 
 
 Due to the size of the file it was not possible to upload it on GitHub, but a link to access the folder with the genomes that created the schema is available at:(https://drive.google.com/open?id=1-FtRJ5ta_Qsq1fJMUoquPlVxT47_oNfX).
 
@@ -80,7 +80,7 @@ In this step *loci* considered paralogous from result of the allelecall (see abo
 # run remove genes
 chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.tsv -g results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg
 ```
-In this step of 82 *loci* were identified as possible paralogs that were removed from further analysis. The list with the paralog loci can be found at: ```results_cg/results_20190921T183955/RepeatedLoci.txt```
+In this step of 82 *loci* were identified as possible paralogs that were removed from further analysis. The list with the paralog *loci* can be found at: ```results_cg/results_20190921T183955/RepeatedLoci.txt```
 
 The output file can be found at: ```analysis_cg/alleleCallMatrix_cg.tsv```
 
@@ -99,7 +99,7 @@ chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 
 In this stage we chose to choose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
 
-In this *Threshold 120* a set of 3168 loci were found to be present in all the analyzed complete genomes, while 4776 loci were present in at least 95%. The output file can be found in the folder: ```analysis_cg/GenomeQualityPlot.html```. 
+In this *Threshold 120* a set of 3168 *loci* were found to be present in all the analyzed complete genomes, while 4776 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_cg/GenomeQualityPlot.html```. 
 
 The list of low qualiy genomes will then be removed from the original list using. The list of genomes removed at threshold 120 can be found at: ```analysis_cg/GenomeRemoved120thr.txt```
 
@@ -121,7 +121,7 @@ This command selects all target genes from the "cgMLST.tsv" spreadsheet.
 # 10 list
 head -n 1 cgMLST.tsv > Genes_100%_Core_120.txt
 ```
-This list needs to be transposed so that each core gene name is reported in a single line:
+This list needs to be transposed so that each core genes name is reported in a single line:
 
 ## Command:
 
