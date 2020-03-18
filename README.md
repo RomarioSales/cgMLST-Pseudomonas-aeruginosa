@@ -32,7 +32,7 @@ cgMLST to *Pseudomonas aeruginosa*.
 
 ## Selection of complete genomes for schema creation
 
-For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes sequences of *P. aeruginosa* were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the complete genomes used to create the schema obtained from RefSeq can be found in the folder "Genomes20181011Sem_Plasmideo141" in the .xlsx format.
+For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes sequences of *P. aeruginosa* were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the complete genomes used to create the schema obtained from RefSeq can be found in the folder "Genomes20181011Sem_Plasmideo141" in the .xlsx format.
 
 Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 142 complete genomes using the sanger-pathogens/mlst_check can be found in the folder "Genomes20181011Sem_Plasmideo141". 
 
@@ -48,14 +48,14 @@ Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_00000
 
 ```bash
 # create schema
-chewBBACA.py CreateSchema -i Genomes20181011Sem_Plasmideo141/ --cpu 15 -o schema_seed --ptf PAO1.trn
+chewBBACA.py CreateSchema -i Complete_Genomes/ --cpu 15 -o schema_seed --ptf PAO1.trn
 ```
 
 The above command uses 15 CPU and creates the schema in the schema_seed folder using the trained product folder PAO1.trn that was generated using the reference genome PAO1 (GCF_000006765.1). The wgMLST schema was defined with 13588 loci based on the 141 complete genomes that created the schema. At this point the schema is defined as a set of loci each with a single allele. 
 
 Due to the size of the file schema_seed it was not possible to upload it on GitHub, but a link to access the file schema_seed is available at: (https://drive.google.com/open?id=1WpsmbMC0awZ7BH8lazoiv-t56A2xnMIO).
 
-**Note:** Genomes20181011Sem_Plasmideo141: Folder containing the 141 complete genomes that created the schema.
+**Note:** Complete_Genomes: Folder containing the 141 complete genomes that created the schema.
 
 ## Step 2: Allele calling
 
@@ -65,7 +65,7 @@ In this step the allele calling is performed using the resulting set of *loci* f
 
 ```bash
 # run allelecall
-chewBBACA.py AlleleCall -i Genomes20181011Sem_Plasmideo141 -g schema_seed/ -o results_cg --cpu 15 --ptf PAO1.trn
+chewBBACA.py AlleleCall -i Complete_Genomes -g schema_seed/ -o results_cg --cpu 15 --ptf PAO1.trn
 ```
 
 The allele call used the default BLAST Score Ratio (BSR) threshold of 0.6.
@@ -134,7 +134,7 @@ This step generated the file> Genes_Core_Al.txt
 
 The list file with 3168 *loci* at ```results_cg/Genes_Core_Al.txt```.
 
-This list was then modified so that each name was preceeded by *schema_seed* :
+This list was then modified so that each name was preceeded by *schema_seed*:
 
 ## Command:
 
@@ -145,24 +145,24 @@ This modified list can be found: ```results_cg/listgenes_core_100_120.txt```.
 
 ## Step 3: Scheme Validation (Allele calling)
 
-For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in GenBank (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "GenomasValidacao210919" in the .xlsx format. 
+For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the .xlsx format. 
 
-Multilocus sequence type (MLST) was determined as described above in step 1: Creating the Schema. New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 2759 drafts genomes using the sanger-pathogens/mlst_check can be found in the folder "GenomasValidacao210919".
+Multilocus sequence type (MLST) was determined as described above in step 1: Creating the Schema. New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 2759 drafts genomes using the sanger-pathogens/mlst_check can be found in the folder "Genomes_Validation".
 
 Genomes that could not be assigned MLST type sequence (ST) (https://github.com/sanger-pathogens/mlst_check) were not included for the validation of the cgMLST scheme. Of the 2759 unfinished genomes available, it was possible to assign STs to 2686 unfinished genomes. A second filter was added to remove unfinished genomes that had ≥200 contigs and 502 genomes were removed. 
 
-In the end, 73 unfinished genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2759 genomes obtained from RefSeq, 2184 genomes were used for the validation of the cgMLST scheme. The list of all the 2184 drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "GenomasValidacao210919" in the .xlsx format.
+In the end, 73 unfinished genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2759 genomes obtained from RefSeq, 2184 genomes were used for the validation of the cgMLST scheme. The list of all the 2184 drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the .xlsx format.
 
 
-From this we repeat the allele call using only the selected candidate *3164 loci* for each of the unfinished genomes selected for validation (2184 genome drafts) after performing the filters described above.
+From this we repeat the allele call using only the selected candidate *3164 loci* for each of the draft genomes selected for validation (2184 genome drafts) after performing the filters described above.
 
 ## Command:
 
 ```bash
-chewBBACA.py AlleleCall -i GenomasValidacao210919 -g listgenes_core_100_120.txt -o results --cpu 15 --ptf PAO1.trn
+chewBBACA.py AlleleCall -i Genomes_Validation -g listgenes_core_100_120.txt -o results --cpu 15 --ptf PAO1.trn
 ```
 
-This folder generated from this step **GenomasValidacao210919** has all 2184 validation unfinished genomes acquired from the RefSeq that has ST and and they had less than 200 contigs.
+This folder generated from this step **Genomes_Validation** has all 2184 validation unfinished genomes acquired from the RefSeq that has ST and and they had less than 200 contigs.
 
 The folder with the output file can be found at: ```results_all/ results_20191126T121343/```
 
@@ -190,7 +190,7 @@ The cgMLST_all.tsv file can be found in the folder: ```analysis_all/cgMLST_all.t
 
 ## Step 3.2: Evaluation of genome quality
 
-After concatenation, the *TestGenomeQuality* to assess the impact of each validation genome in relation to the *loci* candidates in order to exclude low quality validation genomes. In this step you need to define a new *Threshold* for this dataset, as well as a new value of the parameter *p*, because loci that remain after the filters are the ones that constituted the final scheme.
+After concatenation, the *TestGenomeQuality* to assess the impact of each validation genome in relation to the *loci* candidates in order to exclude low quality validation genomes. In this step you need to define a new *Threshold* for this dataset, as well as a new value of the parameter *p*, because *loci* that remain after the filters are the ones that constituted the final scheme.
 
 ## Command:
 
@@ -245,7 +245,7 @@ Due to the size of the file rms/RmS.html it was not possible to upload it on Git
 
 ## Step 7: Analyze the proteins in the genes of the wgMLST
 
-To check which protein encodes each loci found in the wg/cgMLST. The list of proteins corresponding to all 13588 loci identified in the wg / cgMLST targets is found in the new_protids.tsv file.
+To check which protein encodes each *loci* found in the wg/cgMLST. The list of proteins corresponding to all 13588 *loci* identified in the wg / cgMLST targets is found in the new_protids.tsv file.
 
 ## Command:
 
