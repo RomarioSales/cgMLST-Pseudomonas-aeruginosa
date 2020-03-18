@@ -34,7 +34,7 @@ cgMLST to *Pseudomonas aeruginosa*.
 
 For *Pseudomonas aeruginosa* select the option RefSeq from GenBank at https://www.ncbi.nlm.nih.gov/assembly. RefSeq corresponds to a comprehensive, non-redundant, well-annotated set of reference sequences. A set of 142 complete genomes sequences of *P. aeruginosa* were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the complete genomes used to create the schema obtained from RefSeq can be found in the folder "Complete_Genomes" in the Complete_Genomes.xlsx format.
 
-Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2018). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 142 complete genomes using the sanger-pathogens/mlst_check can be found in the folder "Complete_Genomes". 
+Multilocus sequence type (MLST) for the 142 complete genomes was determined using (https://github.com/sanger-pathogens/mlst_check) and the MLST schema for *P. aeruginosa* (www.pubmlst.org; downloaded September 2019). New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 142 complete genomes using the sanger-pathogens/mlst_check can be found in the folder "Complete_Genomes/Complete_Genomes.xlsx". 
 
 Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_000006765.1) was included so that the Prodigal algorithm could use it as reference to recognize coding sequences (CDs). Prodigal generated the PAO1.trn file at this step. 
 
@@ -53,7 +53,7 @@ The above command uses 15 CPU and creates the schema in the schema_seed folder u
 
 Due to the size of the file schema_seed it was not possible to upload it on GitHub, but a link to access the file schema_seed is available at: (https://drive.google.com/open?id=1WpsmbMC0awZ7BH8lazoiv-t56A2xnMIO).
 
-**Note:** Complete_Genomes: Folder containing the 141 complete genomes that created the schema.
+**Note:** Complete_Genomes: Folder containing the list 141 complete genomes that created the schema.
 
 ## Step 2: Allele calling
 
@@ -78,7 +78,7 @@ In this step *loci* considered paralogous from result of the allelecall (see abo
 # run remove genes
 chewBBACA.py RemoveGenes -i results_cg/results_20190921T183955/results_alleles.tsv -g results_cg/results_20190921T183955/RepeatedLoci.txt -o alleleCallMatrix_cg
 ```
-In this step of 82 *loci* were identified as possible paralogs that were removed from further analysis. The list with the paralog *loci* can be found at: ```results_cg/results_20190921T183955/RepeatedLoci.txt```
+In this step of 82 *loci* were identified as possible paralogs that were removed from further analysis. The list with the RepeatedLoci.txt can be found at: ```results_cg/results_20190921T183955/RepeatedLoci.txt```
 
 The output file can be found at: ```analysis_cg/alleleCallMatrix_cg.tsv```
 
@@ -95,11 +95,13 @@ We then define the percentage of *loci* that will constitute the schema based on
 chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 ```
 
-In this stage we chose to choose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
+In this stage we chose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
 
 In this *Threshold 120* a set of 3168 *loci* were found to be present in all the analyzed complete genomes, while 4776 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_cg/GenomeQualityPlot.html```. 
 
-The list of low qualiy genomes will then be removed from the original list using. The list of genomes removed at threshold 120 can be found at: ```analysis_cg/GenomeRemoved120thr.txt```
+The list with the genes present in 95% of the genomes at the chosen *Threshold* can be retrieved in the folder ```analysis_cg/Genes_95%.txt``` as well as the list of genomes removed at each *Threshold* ```analysis_cg/removedGenomes.txt```
+
+The list of low qualiy genomes will then be removed from the archive original (removedGenomes.txt). The list of genomes removed at *Threshold 120* can be found at: ```analysis_cg/GenomeRemoved120thr.txt```
 
 ## Command:
 
@@ -108,8 +110,7 @@ The list of low qualiy genomes will then be removed from the original list using
 chewBBACA.py ExtractCgMLST -i alleleCallMatrix_cg.tsv -o cgMLST_120 -p 1.0 -g GenomeRemoved120thr.txt
 ```
 
-This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of each selected * loci * and will be used to create the core gene list.
-
+This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of 3168 *loci* selected * loci * and will be used to create the core gene list. In addition another 3 archive are released by this script:*cgMLSTschema.txt;mdata_stats.tsv and Presence_Absence.tsv* everyone is in the folder ```cgMLST_120```.
 
 ## Step 2.3: Creating the core gene list
 
