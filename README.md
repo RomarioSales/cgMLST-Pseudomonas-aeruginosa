@@ -40,7 +40,7 @@ Among the 142 genomes, *Pseudomonas aeruginosa* PAO1 reference genome (GCF_00000
 
 **The PAO1 genome was then removed from further analysis**.
 
-## Step 1: Definition of CD sequences 
+## Step 1: Definition of CDs sequences 
 
 ## Command: 
 
@@ -84,7 +84,7 @@ The output file can be found at: ```analysis_cg/alleleCallMatrix_cg.tsv```
 
 ## Step 2.2: Genomes Quality Control
 
-In this step we define a *Threshold* of the schema that limits the loss of *loci* targets defined in the previous steps while excluding genomes considered to be of poor quality due to significant *loci* absence. 
+In this step we define a *Threshold* of the schema that limits the loss of *loci* targets defined in the previous steps while excluding genomes considered to be of low quality due to significant *loci* absence. 
 
 We then define the percentage of *loci* that will constitute the schema based on how many targets we want to keep in this phase:  **100%, 99.5%, 99% and 95%** of the *loci* present in the set of high quality genomes. This is one of the main steps in defining the cgMLST schema targets.
 
@@ -95,13 +95,9 @@ We then define the percentage of *loci* that will constitute the schema based on
 chewBBACA.py TestGenomeQuality -i alleleCallMatrix_cg.tsv -n 13 -t 300 -s 5
 ```
 
-In this stage we chose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets.
+In this *Threshold* (120) a set of 3168 *loci* were found to be present in all the analyzed complete genomes, while 4776 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_cg/GenomeQualityPlot.html```. The list with the genes present in 95% of the genomes at the chosen *Threshold* can be retrieved in the folder ```analysis_cg/Genes_95%.txt```. 
 
-In this *Threshold 120* a set of 3168 *loci* were found to be present in all the analyzed complete genomes, while 4776 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_cg/GenomeQualityPlot.html```. 
-
-The list with the genes present in 95% of the genomes at the chosen *Threshold* can be retrieved in the folder ```analysis_cg/Genes_95%.txt``` as well as the list of genomes removed at each *Threshold* ```analysis_cg/removedGenomes.txt```
-
-The list of low qualiy genomes will then be removed from the archive original (removedGenomes.txt). The list of genomes removed at *Threshold 120* can be found at: ```analysis_cg/GenomeRemoved120thr.txt```
+In this stage we chose the *loci* present in 100% (*p1.0*) of the complete genomes and the *Threshold* 120 that limited the loss of the *loci* in the genomes. In this *Threshold* (120) 11 complete genomes were removed due to loss of *loci* targets. The list of genomes removed at each *Threshold* can be retrieved in the folder ```analysis_cg/removedGenomes.txt```. The list of low qualiy genomes will then be removed from the archive original (removedGenomes.txt). The list of genomes removed at *Threshold 120* can be found at: ```analysis_cg/GenomeRemoved120thr.txt```
 
 ## Command:
 
@@ -110,7 +106,7 @@ The list of low qualiy genomes will then be removed from the archive original (r
 chewBBACA.py ExtractCgMLST -i alleleCallMatrix_cg.tsv -o cgMLST_120 -p 1.0 -g GenomeRemoved120thr.txt
 ```
 
-This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of 3168 *loci* selected * loci * and will be used to create the core gene list. In addition another 3 archive are released by this script:*cgMLSTschema.txt;mdata_stats.tsv and Presence_Absence.tsv* everyone is in the folder ```cgMLST_120```.
+This script selects all * loci * present in the selected * Threshold *. The value * p * is associated with the percentage of * loci * that has been set, for example: * p1.0 * selects all * loci * present in the * Threshold * chosen in all genomes ie those present in 100% of genomes at that * Threshold *. Subsequently a cgMLST_120 folder is created which receives the result of the allelic profile for each of the cgMLST candidate * 3168 loci * (allelic profile matrix). The file in this folder (cgMLST.tsv) contains the allelic profile of 3168 *loci* selected * loci * and will be used to create the core gene list. In addition another 3 archive are released by this script:*cgMLSTschema.txt;mdata_stats.tsv and Presence_Absence.tsv* everyone is in the folder ```cgMLST_120```.
 
 ## Step 2.3: Creating the core gene list
 
