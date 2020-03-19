@@ -140,13 +140,13 @@ This modified list can be found: ```results_cg/list_genes_core.txt```.
 
 ## Step 3: Scheme Validation (Allele calling)
 
-For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the .xlsx format. 
+For the validation step we selected 2759 unfinished *P. aeruginosa* genomes were publicly available in RefSeq (https://www.ncbi.nlm.nih.gov/assembly) in September 2018. The list of all the drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the Genomes_Validation.xlsx format. 
 
 Multilocus sequence type (MLST) was determined as described above in step 1: Creating the Schema. New sequence types (STs) were assigned a unique internal identifier (STs ≥4000). The sequence type (STs) obtained for each of the 2759 drafts genomes using the sanger-pathogens/mlst_check can be found in the folder "Genomes_Validation".
 
-Genomes that could not be assigned MLST type sequence (ST) (https://github.com/sanger-pathogens/mlst_check) were not included for the validation of the cgMLST scheme. Of the 2759 unfinished genomes available, it was possible to assign STs to 2686 unfinished genomes. A second filter was added to remove unfinished genomes that had ≥200 contigs and 502 genomes were removed. 
+Genomes that could not be assigned sequence type (ST) (https://github.com/sanger-pathogens/mlst_check) were not included for the validation of the cgMLST scheme. Of the 2759 drafts genomes available, it was possible to assign STs to 2686 drafts genomes. A second filter was added to remove drafts genomes that had ≥200 contigs and 502 genomes were removed. 
 
-In the end, 73 unfinished genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2759 genomes obtained from RefSeq, 2184 genomes were used for the validation of the cgMLST scheme. The list of all the 2184 drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the .xlsx format.
+In the end, 73 drafts genomes were removed due to the absence of MLST *loci* and 502 were removed because the available sequences consisted of ≥200 contigs. Thus, of the 2759 drafts genomes obtained from RefSeq, 2184 genomes were used for the validation of the cgMLST scheme. The list of all the 2184 drafts genomes used to validation the schema obtained from RefSeq can be found in the folder "Genomes_Validation" in the Genomes_Validation.xlsx format.
 
 
 From this we repeat the allele call using only the selected candidate *3164 loci* for each of the draft genomes selected for validation (2184 genome drafts) after performing the filters described above.
@@ -157,16 +157,18 @@ From this we repeat the allele call using only the selected candidate *3164 loci
 chewBBACA.py AlleleCall -i Genomes_Validation -g list_genes_core.txt -o results_all --cpu 15 --ptf PAO1.trn
 ```
 
-This folder generated from this step **Genomes_Validation** has all 2184 validation drafts genomes acquired from the RefSeq that has STs and they had less than 200 contigs.
+This folder **Genomes_Validation** has all 2184 validation drafts genomes acquired from the RefSeq that has STs and they had less than 200 contigs.
 
-The folder with the output file can be found at: ```results_all/ results_20191126T121343/```
+The folder with the output file can be found at: ```results_all/ results_20191126T121343/```. This folder contains 5 files "logging_info.txt; RepeatedLoci.txt; results_alleles.tsv; results_contigsInfo.tsv and results_statistics.tsv".
+
+The ```results_all/ results_20191126T121343/results_alleles.tsv``` file contains the allelic profile of the 2184 typed drafts genomes.
 
 Due to the size of the **results_contigsInfo.tsv** file, it was not possible to upload it to GitHub in the ```results_all/ results_20191126T121343/``` folder, but a link to access the file is available at: (https://drive.google.com/open?id=11_sZqOXK8bkWFFsvcZo1oq7-PqCGif_G).
 
 
 ## Step 3.1: Concatenate the allelic
 
-Concatenate the allelic profile matrix obtained from the creation of the scheme with the matrix obtained for the validation genomes. To concatenate the matrix of the *loci* that defined the scheme and matrix of the loci of the validation genomes was used the following command:
+Concatenate the allelic profile matrix obtained from the creation of the scheme (cgMLST_120/cgMLST.tsv) with the matrix obtained for the validation genomes (results_all/ results_20191126T121343/results_alleles.tsv). To concatenate the matrix of the *loci* that defined the scheme and matrix of the *loci* of the validation genomes was used the following command:
 
 ## Command:
 
@@ -181,7 +183,7 @@ head -n 1 cgMLST_120/cgMLST.tsv > cgMLST_all.tsv
 # concatenate
 grep -v ^FILE cgMLST_120/cgMLST.tsv results_all/ results_20191126T121343/results_alleles.tsv >> cgMLST_all.tsv
 ```
-The cgMLST_all.tsv file can be found in the folder: ```analysis_all/cgMLST_all.tsv```.
+The cgMLST_all.tsv file can be found in the folder: ```analysis_all/cgMLST_all.tsv```. This file (cgMLST_all.tsv) contains the allelic profile of the 2314 genomes.
 
 ## Step 3.2: Evaluation of genome quality
 
@@ -198,9 +200,13 @@ In order to exclude validation genomes that have left the scheme it is necessary
 
 ## Step 4: Extracting the Matrix loci
 
-In this stage we choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. In this *Threshold* (200) 5 unfinished genomes were removed due to loss of *loci* targets.
+In this stage we choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. 
 
-To transpose (put the names of the validation genomes one in each line) I used the datamash and created the file > removedGenomes200thr.txt.
+In this *Threshold* (200) a set of 2653 *loci* were found to be present in 99% the analyzed genomes, while 3116 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_all/GenomeQualityPlot.html```. The list with the genes present in 95% of the genomes at the chosen *Threshold* can be retrieved in the folder ```analysis_all/Genes_95%.txt```. The list of genomes removed at each *Threshold* can be retrieved in the folder ```analysis_all/removedGenomes.txt```. From this list we created another (removedGenomes200thr.txt) with only the genomes removed at *Threshold* (200). The list of genomes removed at *Threshold 200* can be retrieved in the folder: ```analysis_all/removedGenomes200thr.txt```
+
+In this *Threshold* (200) 5 drafts genomes were removed due to loss of *loci* targets.
+
+To transpose (put the names of the validation genomes one in each line) I used the datamash and created the file > removedGenomes200thr.txt. This file can be found in the folder: ```analysis_all/removedGenomes200.txt```
 
 ## Command:
 
@@ -208,7 +214,7 @@ To transpose (put the names of the validation genomes one in each line) I used t
 # transpose
 datamash -W transpose < removedGenomes200.txt > removedGenomes200thr.txt
 ``` 
-The genomes that were excluded in the Threshold 200 have been placed in the **removedGenomes200thr.txt**
+The genomes that were excluded in the *Threshold 200* have been placed in the **removedGenomes200thr.txt**
 
 This file can be found in the folder: ```analysis_all/removedGenomes200thr.txt```
 
@@ -218,13 +224,15 @@ This file can be found in the folder: ```analysis_all/removedGenomes200thr.txt``
 chewBBACA.py ExtractCgMLST -i cgMLST_all.tsv -o cgMLST_200 -p0.99 -g removedGenomes200thr.txt 
 ```
 
-This script selects *loci* and genomes that remained in the *Threshold* 200 and excludes the validation and *loci* genomes that were excluded in this *Threshold*.
+This script selects *loci* and genomes that remained in the *Threshold 200* and excludes the validation and *loci* genomes that were excluded in this *Threshold*.
 
-The folder with the output file can be found at: ```cgMLST_200```.
+The folder with the output file can be found at: ```cgMLST_200```. This folder contains four files "cgMLST.tsv; cgMLSTschema.txt; mdata_stats.tsv and Presence_Absence.tsv".
+
+The folder with targets of cgMLST the file can be found at: ```cgMLST_200/cgMLSTschema.txt``` contains the list of 2653 genes in the core genome defined as targets of cgMLST.
 
 ## Step 5: Minimum Spanning Tree
 
-Based on the allelic profiles obtained by the cgMLST scheme for each of the 2309 genomes minimum spanning trees were constructed using the software GrapeTree (version 1.5.0) (https://github.com/achtman-lab/GrapeTree/releases) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection. The ```cgMLST_200/cgMLST.tsv ``` file contains the allelic profile of the 2309 genomes typed by cgMLST.
+Based on the allelic profiles obtained by the cgMLST scheme for each of the 2309 genomes minimum spanning trees (MST) were constructed using the software GrapeTree (version 1.5.0) (https://github.com/achtman-lab/GrapeTree/releases) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection. The ```cgMLST_200/cgMLST.tsv ``` file contains the allelic profile of the 2309 genomes typed by cgMLST.
 
 ## Step 6: Evaluation of the schema cgMLST
 
@@ -240,7 +248,7 @@ Due to the size of the file rms/RmS.html it was not possible to upload it on Git
 
 ## Step 7: Analyze the proteins in the genes of the wgMLST
 
-To check which protein encodes each *loci* found in the wg/cgMLST. The list of proteins corresponding to all 13588 *loci* identified in the wg / cgMLST targets is found in the new_protids.tsv file.
+To check which protein encodes each *loci* found in the wg/cgMLST. The list of proteins corresponding to all 13588 *loci* identified in the wg / cgMLST targets is found in the **new_protids.tsv** file. The list of proteins encoded by the 2653 cgMLST target genes can be found as: **Target_genes_cgMLST.xlsx**
 
 ## Command:
 
