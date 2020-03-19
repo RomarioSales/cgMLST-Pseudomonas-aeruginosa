@@ -116,7 +116,7 @@ This command selects all target genes from the "cgMLST.tsv" spreadsheet.
 # 10 list
 head -n 1 cgMLST.tsv > Genes_100%_Core_120.txt
 ```
-This list needs to be transposed so that each core genes name is reported in a single line:
+This step generated archive *Genes_100%_Core_120.txt* an be retrieved in the folder ```results_cg/Genes_100%_Core_120.txt```. This list needs to be transposed so that each core genes name is reported in a single line:
 
 ## Command:
 
@@ -127,16 +127,16 @@ datamash -W transpose < Genes_100%_Core_120.txt > Genes_Core_Al.txt
 
 This step generated the file> Genes_Core_Al.txt
 
-The list file with 3168 *loci* at ```results_cg/Genes_Core_Al.txt```.
+You can see the list file with 3168 *loci* at ```results_cg/Genes_Core_Al.txt``` and for further use, we add for each *loci* the full path to each locus fasta file.
 
-This list was then modified so that each name was preceeded by *schema_seed*:
+This list results_cg/Genes_Core_Al.txt was then modified so that each name was preceeded by *schema_seed*:
 
 ## Command:
 
 ```bash
-tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > listgenes_core_100_120.txt
+tail -n+1 Genes_Core_Al.txt | cut -f2 | perl -pe 's: :\n:g' | sort -Vu | awk '{print("schema_seed/"$1)}' > list_genes_core.txt
 ```
-This modified list can be found: ```results_cg/listgenes_core_100_120.txt```.
+This modified list can be found: ```results_cg/list_genes_core.txt```.
 
 ## Step 3: Scheme Validation (Allele calling)
 
@@ -154,10 +154,10 @@ From this we repeat the allele call using only the selected candidate *3164 loci
 ## Command:
 
 ```bash
-chewBBACA.py AlleleCall -i Genomes_Validation -g listgenes_core_100_120.txt -o results --cpu 15 --ptf PAO1.trn
+chewBBACA.py AlleleCall -i Genomes_Validation -g list_genes_core.txt -o results_all --cpu 15 --ptf PAO1.trn
 ```
 
-This folder generated from this step **Genomes_Validation** has all 2184 validation unfinished genomes acquired from the RefSeq that has ST and and they had less than 200 contigs.
+This folder generated from this step **Genomes_Validation** has all 2184 validation drafts genomes acquired from the RefSeq that has STs and they had less than 200 contigs.
 
 The folder with the output file can be found at: ```results_all/ results_20191126T121343/```
 
