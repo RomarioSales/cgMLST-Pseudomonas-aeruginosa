@@ -4,6 +4,8 @@ cgMLST to *Pseudomonas aeruginosa*.
 
 ## chewBBACA
 
+To download ChewBBACA access the link:
+
 * https://github.com/B-UMMI/chewBBACA_tutorial
 
 ## Workflow
@@ -12,9 +14,12 @@ cgMLST to *Pseudomonas aeruginosa*.
 * Step 2: Allele calling
 * Step 3: Schema Validation (Allele call)
 * Step 4: Extracting the Matrix *loci*
-* Step 5: Minimum Spanning Tree
+* Step 5: Minimum Spanning Tree (MST)
 * Step 6: Evaluation of the schema cgMLST
 * Step 7: Analyze the proteins in the genes of the wgMLST
+* Step 8: How to type genomes of interest using the cgMLST scheme
+* Step 9: Analyze the results
+* Step 10: Allele profile view by minimum spanning tree (mst)
  
 ## Softwares and Downloads (Main dependencies)
 
@@ -228,7 +233,7 @@ This script selects *loci* and genomes that remained in the *Threshold 200* and 
 
 The folder with the output file can be found at: ```cgMLST_200```. This folder contains four files "cgMLST.tsv; cgMLSTschema.txt; mdata_stats.tsv and Presence_Absence.tsv".
 
-The folder with targets of cgMLST the file can be found at: ```cgMLST_200/cgMLSTschema.txt``` contains the list of 2653 genes in the core genome defined as targets of cgMLST.
+The folder with targets of cgMLST the file can be found at: ```cgMLST_200/cgMLSTschema.txt``` contains the list of 2653 genes in the core genome defined as targets of cgMLST. The list with the 2653 cgMLST target genes with the path added for each locus fasta file to be searched in the schema_seed folder is in the folder:```cgMLST_200/gene_targets.txt```
 
 ## Step 5: Minimum Spanning Tree
 
@@ -255,3 +260,38 @@ To check which protein encodes each *loci* found in the wg/cgMLST. The list of p
 ```bash
 chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
 ```
+
+## Step 8: How to type genomes of interest using the cgMLST scheme
+
+Necessary steps to run chewBBACA and type genomes of interest with the cgMLST scheme.
+
+## Step 8.1: Install ChewBBACA and all its dependencies as described above;
+
+## Step 8.2: Download the folder (schema_seed) through the link available in step 1;
+
+## Step 8.3: Download the list of target genes (gene_targets.txt). This list already contains contains full path for each locus fasta file for ChewBBACA to fetch the target genes in the folder schema_seed/.
+
+## Step 8.4: It is recommended to upload the trained folder (PA01.trn) because it is the reference folder for Prodigal to recognize the coding sequences (CDs).
+
+## Step 8.5: The folder of the genomes/ to be typed must be in the same directory that contains the schema_seed/ folder.
+
+## Step 8.6: Run the script to type the genomes:
+
+```bash
+chewBBACA.py AlleleCall -i genomes -g gene_targets.txt -o results --cpu 15 --ptf PAO1.trn
+```
+**Note**:The folder “genomes" represents the folder with the genomes to be typed.
+**Note**:The list "gene_targets.txt" containing the 2653 cgMLST target genes with the path to the schema_seed folder”
+
+
+## Step 8.7: How should be the directory to run ChewBBACA
+
+A master directory (Analyze_genomes/) containing the folders that are needed to run ChewBBACA with the 2653 cgMLST target genes was created as an example: Analyze_genomes/. This folder contains a directory called “genomes/” representing the folder of the genomes to be typed. The second folder is the “schema_seed” representing the “schema_seed/” folder that must be downloaded. In addition to two “gene_targets.txt” files containing the 2653 target genes of cgMLST and the file PA01.trn which is the prodigal's trained file to recognize CDs.
+
+## Step 9: Analyze the results
+
+The allelic profile of the typed genomes will be in the folder: “results/ results_alleles.tsv” which is the output of the file released by the script above. Other output released by the above script will be in the folder “results/”, as an example: RepeatedLoci.txt; logging_info.txt; results_contigsInfo.tsv
+
+## Step 10: Allele profile view by minimum spanning tree (mst)
+
+To view the allelic profile data of the typed genomes you need to access the output of the script present in the folder “results/ results_alleles.tsv”. It is possible in two ways the first is to download free software GrapeTree (version1.5.0) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection available in (https://github.com/achtman-lab/GrapeTree/releases) or through the software Phyloviz online.
