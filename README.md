@@ -263,30 +263,42 @@ chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
 
 ## Step 8: How to type genomes of interest using the cgMLST scheme
 
-Necessary steps to run chewBBACA and type genomes of interest with the cgMLST scheme.
+Necessary steps to run chewBBACA and type genomes of interest with the cgMLST schema.
 
 ## Step 8.1: Install ChewBBACA and all its dependencies as described above;
 
 ## Step 8.2: Download the folder (schema_seed) through the link available in step 1;
 
-## Step 8.3: Download the list of target genes (gene_targets.txt). This list already contains contains full path for each locus fasta file for ChewBBACA to fetch the target genes in the folder schema_seed/.
+The ```schema_seed/``` folder was created in Step 1 where we identified all CDs of the 141 genomes creating the schema.
 
-## Step 8.4: It is recommended to upload the trained folder (PA01.trn) because it is the reference folder for Prodigal to recognize the coding sequences (CDs).
+## Step 8.3: Download the list of target genes (gene_targets.txt): 
 
-## Step 8.5: The folder of the genomes/ to be typed must be in the same directory that contains the schema_seed/ folder.
+This list already contains contains full path for each locus fasta file for ChewBBACA to fetch the target genes in the folder schema_seed/.
 
-## Step 8.6: Run the script to type the genomes:
+## Step 8.4: Download the Prodigal trained file
+
+It is recommended to upload the trained folder (PA01.trn) because it is the reference folder for Prodigal to recognize the coding sequences (CDs). Prodigal was trained with the reference genome of *Pseudomonas aeruginosa* (PAO1) to recognize CDs.
+
+## Step 8.5: Genomes of interest
+
+The genomes of interest must be in a specific folder, for example the "genomes/" folder and must be in the same directory that contains the "schema_seed/" folder.
+
+After this part, the next step is to run the command:
+
+## Command: 
 
 ```bash
 chewBBACA.py AlleleCall -i genomes -g gene_targets.txt -o results --cpu 15 --ptf PAO1.trn
 ```
 **Note**:The folder “genomes" represents the folder with the genomes to be typed.
+
 **Note**:The list "gene_targets.txt" containing the 2653 cgMLST target genes with the path to the schema_seed folder”
 
+This command will release the output in the folder: ```results/```
 
-## Step 8.7: How should be the directory to run ChewBBACA
+## Step 8.6: How should be the master directory to run ChewBBACA
 
-A master directory (Analyze_genomes/) containing the folders that are needed to run ChewBBACA with the 2653 cgMLST target genes was created as an example: Analyze_genomes/. This folder contains a directory called “genomes/” representing the folder of the genomes to be typed. The second folder is the “schema_seed” representing the “schema_seed/” folder that must be downloaded. In addition to two “gene_targets.txt” files containing the 2653 target genes of cgMLST and the file PA01.trn which is the prodigal's trained file to recognize CDs.
+A master directory (Analyze_genomes/) containing the folders that are needed to run ChewBBACA with the 2653 cgMLST target genes was created as an example: Analyze_genomes/. This folder contains a directory called “example_genomes/” representing the folder of the genomes to be typed. The second folder is the “example_schema_seed” representing the “schema_seed/” folder that must be downloaded. In addition to two “gene_targets.txt” files containing the 2653 target genes of cgMLST and the file PA01.trn which is the prodigal's trained file to recognize CDs.
 
 ## Step 9: Analyze the results
 
