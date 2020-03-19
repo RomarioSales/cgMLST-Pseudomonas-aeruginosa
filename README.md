@@ -17,7 +17,7 @@ To download ChewBBACA access the link:
 * Step 5: Minimum Spanning Tree (MST)
 * Step 6: Evaluation of the schema cgMLST
 * Step 7: Analyze the proteins in the genes of the wgMLST
-* Step 8: How to type genomes of interest using the cgMLST scheme
+* Step 8: How to identify the allelic profile of the genomes of interest using this cgMLST database for *P. aeruginosa*
 * Step 9: Analyze the results
 * Step 10: Allele profile view by minimum spanning tree (mst)
  
@@ -261,7 +261,7 @@ To check which protein encodes each *loci* found in the wg/cgMLST. The list of p
 chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
 ```
 
-## Step 8: How to type genomes of interest using the cgMLST scheme
+## Step 8: How to identify the allelic profile of the genomes of interest using this cgMLST database for *P. aeruginosa*
 
 Necessary steps to run chewBBACA and type genomes of interest with the cgMLST schema.
 
