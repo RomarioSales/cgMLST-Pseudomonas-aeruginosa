@@ -263,9 +263,11 @@ chewBBACA.py UniprotFinder -i schema_seed/ -t proteinID_Genome.tsv --cpu 10
 
 ## Step 8: How to identify the allelic profile of the genomes of interest using this cgMLST database for *P. aeruginosa*
 
-Necessary steps to run chewBBACA and type genomes of interest with the cgMLST schema.
+In the steps below we are describing all the necessary steps to identify the allelic profile of the genomes of interest using the cgMLST scheme.
 
-## Step 8.1: Install ChewBBACA and all its dependencies as described above;
+## Step 8.1: Install ChewBBACA and all its dependencies;
+
+To download ChewBBACA and all its dependencies see the topic: Softwares and Downloads (Main dependencies); Other dependencies (for schema evaluation only):
 
 ## Step 8.2: Download the folder (schema_seed) through the link available in step 1;
 
