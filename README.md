@@ -130,11 +130,11 @@ This step generated archive *Genes_100%_Core_120.txt* an be retrieved in the fol
 datamash -W transpose < Genes_100%_Core_120.txt > Genes_Core_Al.txt 
 ```
 
-This step generated the file> Genes_Core_Al.txt
+This step generated the file > Genes_Core_Al.txt
 
 You can see the list file with 3168 *loci* at ```results_cg/Genes_Core_Al.txt``` and for further use, we add for each *loci* the full path to each locus fasta file.
 
-This list results_cg/Genes_Core_Al.txt was then modified so that each name was preceeded by *schema_seed*:
+This list ```results_cg/Genes_Core_Al.txt``` was then modified so that each name was preceeded by *schema_seed*:
 
 ## Command:
 
@@ -164,7 +164,7 @@ chewBBACA.py AlleleCall -i Genomes_Validation -g list_genes_core.txt -o results_
 
 This folder **Genomes_Validation** has all 2184 validation drafts genomes acquired from the RefSeq that has STs and they had less than 200 contigs.
 
-The folder with the output file can be found at: ```results_all/ results_20191126T121343/```. This folder contains 5 files "logging_info.txt; RepeatedLoci.txt; results_alleles.tsv; results_contigsInfo.tsv and results_statistics.tsv".
+The folder with the output file can be found at: ```results_all/ results_20191126T121343/```. This folder contains 5 files: "logging_info.txt; RepeatedLoci.txt; results_alleles.tsv; results_contigsInfo.tsv and results_statistics.tsv".
 
 The ```results_all/ results_20191126T121343/results_alleles.tsv``` file contains the allelic profile of the 2184 typed drafts genomes.
 
@@ -173,7 +173,7 @@ Due to the size of the **results_contigsInfo.tsv** file, it was not possible to 
 
 ## Step 3.1: Concatenate the allelic
 
-Concatenate the allelic profile matrix obtained from the creation of the scheme (cgMLST_120/cgMLST.tsv) with the matrix obtained for the validation genomes (results_all/ results_20191126T121343/results_alleles.tsv). To concatenate the matrix of the *loci* that defined the scheme and matrix of the *loci* of the validation genomes was used the following command:
+Concatenate the allelic profile matrix obtained from the creation of the scheme ```cgMLST_120/cgMLST.tsv``` with the matrix obtained for the validation genomes ```results_all/ results_20191126T121343/results_alleles.tsv```. To concatenate the matrix of the *loci* that defined the scheme and matrix of the *loci* of the validation genomes was used the following command:
 
 ## Command:
 
@@ -275,7 +275,7 @@ The ```schema_seed/``` folder was created in Step 1 where we identified all CDs 
 
 ## Step 8.3: Download the list of target genes (gene_targets.txt): 
 
-This list already contains contains full path for each locus fasta file for ChewBBACA to fetch the target genes in the folder schema_seed/.
+This list already contains contains full path for each locus fasta file for ChewBBACA to fetch the target genes in the folder ```schema_seed/```.
 
 ## Step 8.4: Download the Prodigal trained file
 
@@ -283,7 +283,7 @@ It is recommended to upload the trained folder (PA01.trn) because it is the refe
 
 ## Step 8.5: Genomes of interest
 
-The genomes of interest must be in a specific folder, for example the "genomes/" folder and must be in the same directory that contains the "schema_seed/" folder.
+The genomes of interest must be in a specific folder, for example the ```genomes/``` folder and must be in the same directory that contains the ```schema_seed/``` folder.
 
 After this part, the next step is to run the command:
 
@@ -300,12 +300,12 @@ This command will release the output in the folder: ```results/```
 
 ## Step 8.6: How should be the master directory to run ChewBBACA
 
-A master directory (Analyze_genomes/) containing the folders that are needed to run ChewBBACA with the 2653 cgMLST target genes was created as an example: Analyze_genomes/. This folder contains a directory called “example_genomes/” representing the folder of the genomes to be typed. The second folder is the “example_schema_seed” representing the “schema_seed/” folder that must be downloaded. In addition to two “gene_targets.txt” files containing the 2653 target genes of cgMLST and the file PA01.trn which is the prodigal's trained file to recognize CDs.
+A master directory ```Analyze_genomes/``` containing the folders that are needed to run ChewBBACA with the 2653 cgMLST target genes was created as an example. This folder contains a directory called ```example_genomes/``` representing the folder of the genomes to be typed. The second folder is the ```example_schema_seed/``` representing the ```schema_seed/``` folder that must be downloaded. In addition to two “gene_targets.txt” files containing the 2653 target genes of cgMLST and the file "PA01.trn" which is the prodigal's trained file to recognize CDs.
 
 ## Step 9: Analyze the results
 
-The allelic profile of the typed genomes will be in the folder: “results/ results_alleles.tsv” which is the output of the file released by the script above. Other output released by the above script will be in the folder “results/”, as an example: RepeatedLoci.txt; logging_info.txt; results_contigsInfo.tsv
+The allelic profile of the typed genomes will be in the folder: ```results/results_alleles.tsv``` which is the output of the file released by the script above. Others output released by the above script will be in the folder ```results/```, as an example: RepeatedLoci.txt; logging_info.txt; results_contigsInfo.tsv
 
 ## Step 10: Allele profile view by minimum spanning tree (mst)
 
-To view the allelic profile data of the typed genomes you need to access the output of the script present in the folder “results/ results_alleles.tsv”. It is possible in two ways the first is to download free software GrapeTree (version1.5.0) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection available in (https://github.com/achtman-lab/GrapeTree/releases) or through the software Phyloviz online.
+To view the allelic profile data of the typed genomes you need to access the output of the script present in the folder ```results/results_alleles.tsv```. It is possible in two ways the first is to download free software GrapeTree (version1.5.0) with parameters implemented in MSTree v2 ignoring missing values for the entire strain collection available in (https://github.com/achtman-lab/GrapeTree/releases) or through the software Phyloviz online.
