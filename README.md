@@ -202,11 +202,11 @@ In order to exclude validation genomes that have left the scheme it is necessary
 
 In this stage we choose the *loci* present in 99% (*p0.99*) of the validation genomes and the *Threshold* 200 that limited the loss of the *loci* in the genomes. 
 
-In this *Threshold* (200) a set of 2653 *loci* were found to be present in 99% the analyzed genomes, while 3116 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_all/GenomeQualityPlot.html```. The list with the genes present in 95% of the genomes at the chosen *Threshold* can be retrieved in the folder ```analysis_all/Genes_95%.txt```. The list of genomes removed at each *Threshold* can be retrieved in the folder ```analysis_all/removedGenomes.txt```. From this list we created another (removedGenomes200thr.txt) with only the genomes removed at *Threshold* (200). The list of genomes removed at *Threshold 200* can be retrieved in the folder: ```analysis_all/removedGenomes200thr.txt```
+In this *Threshold* (200) a set of 2653 *loci* were found to be present in 99% the analyzed genomes, while 3116 *loci* were present in at least 95%. The output file can be found in the folder: ```analysis_all/GenomeQualityPlot.html```. The list with the genes present in 95% of the genomes at the chosen *Threshold* can be retrieved in the folder ```analysis_all/Genes_95%.txt```. The list of genomes removed at each *Threshold* can be retrieved in the folder ```analysis_all/removedGenomes.txt```. From this list we created another (removedGenomes200thr.txt) with only the genomes removed at *Threshold* (200). The list of genomes removed at *Threshold 200* can be retrieved in the folder: ```analysis_all/removedGenomes200.txt```
 
 In this *Threshold* (200) 5 drafts genomes were removed due to loss of *loci* targets.
 
-To transpose (put the names of the validation genomes one in each line) I used the datamash and created the file > removedGenomes200thr.txt. This file can be found in the folder: ```analysis_all/removedGenomes200.txt```
+To transpose (put the names of the validation genomes one in each line) we used the datamash and created the file > removedGenomes200thr.txt. This file can be found in the folder: ```analysis_all/removedGenomes200.txt```
 
 ## Command:
 
